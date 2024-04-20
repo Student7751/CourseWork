@@ -1,0 +1,22 @@
+@startuml
+boundary "Окно совершенных сделок" as client_view_window
+boundary "Главное окно" as main_window
+
+actor "Клиент" as user
+
+
+control "Назад" as back_control
+control "Загрузка данных" as load_control
+
+
+user -- client_view_window
+
+entity "База данных" as DB
+
+client_view_window --> back_control: Нажата кнопка Назад
+back_control --> main_window
+client_view_window --> load_control
+DB  <-- load_control: Запрос списка сделок
+
+
+@enduml

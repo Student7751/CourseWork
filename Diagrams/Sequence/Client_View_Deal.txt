@@ -1,0 +1,31 @@
+@startuml Client_View_Deal
+
+actor admin as "Клиент"
+
+boundary "Окно роли\nКлиента" as main_window
+boundary "Окно Списка Сделок" as deal_list_window
+
+entity "БД Совершенных сделок" as deal_db
+
+control error as "Ошибка" #red
+
+admin -> main_window : Нажимает кнопку 'Совершенные сделки'
+
+main_window -> deal_list_window : Отобразить
+deal_list_window -> deal_db : Загрузка данных
+
+alt БД пуста
+    deal_list_window -> error : Отобразить
+    error --> main_window : Возврат
+else БД не пуста
+    deal_list_window -> deal_list_window : Отобразить клиентов
+    deal_list_window --> admin : Возврат
+end
+
+opt Нажата кнопка 'Назад'
+    admin -> deal_list_window : Нажата кнопка 'Назад'
+    deal_list_window -> main_window : Отобразить
+    main_window --> admin : Возврат
+end
+
+@enduml

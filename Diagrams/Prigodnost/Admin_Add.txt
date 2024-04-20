@@ -1,0 +1,24 @@
+@startuml
+boundary "Окно добавления нотариусов" as add_notarius_window
+boundary "Главное окно" as main_window
+
+actor "Администратор" as user
+
+user -- add_notarius_window
+
+
+control "Отмена" as cancel_control
+control "Добавить" as add_control
+control "Отобразить ошибку" as error_control #red
+
+entity "База данных" as DB
+
+add_notarius_window --> cancel_control: Нажата кнопка Отмена
+add_notarius_window --> add_control: Заполнить форму\nНажата кнопка Добавить
+
+cancel_control --> main_window
+add_control --> DB: Сохранение изменений
+add_control --> error_control: Конфликт данных
+
+
+@enduml

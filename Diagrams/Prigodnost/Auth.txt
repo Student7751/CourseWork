@@ -1,0 +1,21 @@
+@startuml
+boundary "Окно авторизации" as entry_window
+boundary "Окно ошибки" as error_window
+boundary "Главное окно" as main_window
+
+actor "Клиент" as user
+
+Entity "База данных" as DB
+
+control "Подтверждение данных" as validation_control
+
+validation_control --> DB
+
+user -- entry_window
+
+entry_window --> validation_control : Вводит данные и нажимает кнопку Вход
+validation_control --> main_window: Успех
+validation_control --> error_window: Ошибка
+
+
+@enduml

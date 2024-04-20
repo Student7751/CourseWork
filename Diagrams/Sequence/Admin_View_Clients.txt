@@ -1,0 +1,31 @@
+@startuml Admin_View_Clients
+
+actor admin as "Администратор"
+
+boundary "Окно роли\nАдминистратора" as main_window
+boundary "Окно Отображения клиентов" as client_list_window
+
+entity "БД клиентов" as clients_db
+
+control error as "Ошибка" #red
+
+admin -> main_window : Нажимает кнопку\n'Просмотреть список клиентов'
+
+main_window -> client_list_window : Отобразить
+client_list_window -> clients_db : Загрузка данных
+
+alt БД пуста
+    client_list_window -> error : Отобразить
+    error --> main_window : Возврат
+else БД не пуста
+    client_list_window -> client_list_window : Отобразить клиентов
+    client_list_window --> admin : Возврат
+end
+
+opt Нажата кнопка 'Назад'
+    admin -> client_list_window : Нажата кнопка 'Назад'
+    client_list_window -> main_window : Отобразить
+    main_window --> admin : Возврат
+end
+
+@enduml

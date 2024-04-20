@@ -1,0 +1,58 @@
+@startuml
+
+class Client{}
+
+class Notary{}
+
+class NotaryDatabase{
+    Notary Database
+    add_notary(Notary)
+    remove_notary(ID)
+    update_db()
+    get_info(ID)
+}
+
+class ClientDatabase{
+    Client Database
+    get_info(ID)
+    add_client(Client)
+    remove_client(ID)
+    update_db()
+    
+}
+
+class AdminWindow{
+    display_window()
+    get_client_list_btn_clicked()
+    update_notary_list_btn_clicked()
+    exit_btn_clicked()
+}
+
+class UpdateNotaryListWindow{
+    Display_window()
+    Update_db_btn_clicked()
+    Add_notary_btn_clicked()
+    Cancel_btn_clicked()
+}
+
+class AddNotaryWindow{
+    Display_window()
+    Confirm_btn_clicked()
+    Cancel_btn_clicked()
+}
+
+class ClientListWindow{
+    Display_window()
+    Exit_window()
+}
+ClientDatabase -up-> Client
+NotaryDatabase --> Notary
+AdminWindow -left-> NotaryDatabase
+AdminWindow --> ClientListWindow
+AdminWindow --> UpdateNotaryListWindow
+UpdateNotaryListWindow --> AddNotaryWindow
+UpdateNotaryListWindow --> NotaryDatabase
+ClientListWindow --> ClientDatabase
+AddNotaryWindow --> NotaryDatabase
+AdminWindow -right-> ClientDatabase
+@enduml

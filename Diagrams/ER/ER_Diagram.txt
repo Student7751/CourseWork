@@ -1,0 +1,54 @@
+@startuml
+
+class Client{
+    ID: int
+    --
+    Name: str
+    Surname: str
+    Patronymic: str
+    Number: str
+}
+
+class Offers{
+    ID: int
+    --
+    Name: str
+    Descr: str
+    Price: int
+}
+
+class Notaries{
+    ID: int
+    --
+    Name: str
+    Surname: str
+    Patronymic: str
+    Number: str
+}
+
+class CompletedDeals{
+    Offer_ID: int
+    --
+    Name: str
+    Date: str
+    Discount: float
+    Client_ID: int
+    Notary_ID: int
+    Price: int
+}
+
+class EntryData{
+    User_ID: int
+    --
+    Login: str
+    Password: str
+}
+
+EntryData }-- Client
+EntryData }-- Notaries
+Offers }-- CompletedDeals
+Offers }-- Notaries
+CompletedDeals }-- Client
+CompletedDeals }-- Notaries
+
+@enduml

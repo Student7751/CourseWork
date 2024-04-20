@@ -1,0 +1,22 @@
+@startuml
+boundary "Окно добавления услуг" as edit_window
+boundary "Главное окно" as main_window
+
+actor "Нотариус" as user
+
+user -- edit_window
+
+control "Добавить услугу" as add_control
+control "Отмена" as cancel_control
+
+entity "База данных" as DB
+
+edit_window --> add_control: Нажата кнопка Добавить услугу
+edit_window --> cancel_control: Нажата кнопка Отмена
+
+add_control --> DB: Сохранение изменений
+
+cancel_control --> main_window
+
+
+@enduml

@@ -1,0 +1,31 @@
+@startuml Client_View_Offer
+
+actor admin as "Клиент"
+
+boundary "Окно роли\nКлиента" as main_window
+boundary "Окно Описания услуг" as offer_list_window
+
+entity "БД услуг" as offer_db
+
+control error as "Ошибка" #red
+
+admin -> main_window : Нажимает кнопку 'Об услугах'
+
+main_window -> offer_list_window : Отобразить
+offer_list_window -> offer_db : Загрузка данных
+
+alt БД пуста
+    offer_list_window -> error : Отобразить
+    error --> main_window : Возврат
+else БД не пуста
+    offer_list_window -> offer_list_window : Отобразить услуги
+    offer_list_window --> admin : Возврат
+end
+
+opt Нажата кнопка 'Назад'
+    admin -> offer_list_window : Нажата кнопка 'Назад'
+    offer_list_window -> main_window : Отобразить
+    main_window --> admin : Возврат
+end
+
+@enduml

@@ -1,0 +1,25 @@
+@startuml
+boundary "Главное окно" as main_window
+boundary "Окно редактирования" as edit_window
+boundary "Окно добавления услуг" as add_window
+
+actor "Нотариус" as user
+
+Entity "База данных" as DB
+
+control "Редактировать услуги" as edit_control
+control "Обновить таблицу" as refresh_control
+control "Добавить услугу" as add_control
+control "Отмена" as cancel_control
+
+user -- main_window
+
+main_window --> edit_control
+edit_window --> cancel_control: Нажата кнопка отмена
+cancel_control -> main_window
+edit_control --> edit_window
+edit_window --> refresh_control: Выбраны чекбоксы\nНажата кнопка\nобновить таблицу
+refresh_control -> DB: Удаление записей
+edit_window --> add_control: Нажата кнопка добавить услугу
+add_control --> add_window
+@enduml

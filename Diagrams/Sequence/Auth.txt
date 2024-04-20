@@ -1,0 +1,28 @@
+@startuml Auth
+
+actor user as "Пользователь"
+
+boundary main_window as "Окно авторизации"
+boundary role_window as "Стартовое окно для роли"
+
+control error as "Ошибка - пользователь\nне найден" #red
+
+entity clients_BD as "БД клиентов"
+entity notarius_BD as "БД нотариусов"
+
+user -> main_window : Нажимает кнопку 'Войти'
+
+main_window -> clients_BD : Поиск клиента в БД
+main_window -> notarius_BD : Поиск нотариуса в БД
+
+alt Учетная запись найдена
+    main_window -> role_window : Переход в окно
+    role_window --> user : Возврат
+
+else Не найдена
+    main_window -> error : Отобразить
+    error --> user : Возврат
+
+end
+
+@enduml

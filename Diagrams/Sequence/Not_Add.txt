@@ -1,0 +1,28 @@
+@startuml Not_Update
+
+actor admin as "Нотариус"
+
+boundary "Окно Клиента" as main_window
+boundary "Окно Добавления Услуги" as add_offer_window
+
+entity "БД услуг" as offers_db
+
+control error as "Ошибка" #red
+
+admin -> add_offer_window: Ввод данных
+admin -> add_offer_window: Нажимает кнопку 'Добавить'
+
+alt Поля некорректны
+    add_offer_window -> error : Отобразить
+    error --> add_offer_window : Возврат
+else Поля корректны
+    add_offer_window -> offers_db : Запись данных
+    offers_db --> add_offer_window : Возврат
+end
+
+opt Нажата кнопка 'Назад'
+    admin -> add_offer_window : Нажата кнопка 'Назад'
+    add_offer_window --> main_window : Возврат
+end
+
+@enduml

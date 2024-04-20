@@ -1,0 +1,23 @@
+@startuml
+boundary "Окно просмотра списка услуг" as client_view_window
+boundary "Главное окно" as main_window
+
+actor "Клиент" as user
+
+
+control "Просмотреть список услуг" as client_view_control
+control "Назад" as back_control
+
+
+user -- client_view_control
+
+entity "База данных" as DB
+
+client_view_control --> client_view_window
+client_view_window --> back_control: Нажата кнопка Назад
+back_control --> main_window
+DB -left-> client_view_window: Загрузка списка услуг
+DB  <-- client_view_window: Запрос списка услуг
+
+
+@enduml
