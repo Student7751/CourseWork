@@ -5,8 +5,6 @@ boundary "Окно Редактирования нотариусов" as notariu
 
 entity "БД нотариусов" as notarius_db
 
-control error as "Ошибка" #red
-
 admin -> main_window : Нажимает кнопку\n'Редактировать нотариусов'
 
 main_window -> notarius_update_window : Отобразить
