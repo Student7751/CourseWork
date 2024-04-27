@@ -4,7 +4,6 @@ actor admin as "Нотариус"
 
 boundary "Окно роли\nНотариуса" as main_window
 boundary "Окно Редактирования" as update_offer_window
-boundary "Окно Добавления Услуги" as add_offer_window
 
 entity "БД услуг" as offers_db
 
@@ -22,15 +21,11 @@ offers_db --> update_offer_window : Возврат
 
 admin -> update_offer_window: Нажимает кнопку 'Добавить элемент'
 
-update_offer_window -> add_offer_window : Отобразить
-
-admin -> add_offer_window: Нажимает кнопку 'Добавить'
-
 alt Поля некорректны
-    add_offer_window -> error : Отобразить
-    error --> add_offer_window : Возврат
+    update_offer_window-> error : Отобразить
+    error --> update_offer_window: Возврат
 else Поля корректны
-    add_offer_window -> offers_db : Запись данных
+    update_offer_window-> offers_db : Запись данных
     offers_db --> update_offer_window : Возврат
 end
 
