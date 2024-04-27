@@ -1,6 +1,6 @@
 @startuml
 boundary "Окно авторизации" as entry_window
-boundary "Окно ошибки" as error_window
+boundary "Окно ошибки" as error_window #red
 boundary "Главное окно" as main_window
 
 actor "Клиент" as user
