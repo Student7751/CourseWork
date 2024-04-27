@@ -16,7 +16,11 @@ class Offers{
     Descr: str
     Price: int
 }
-
+class Admins{
+    ID: int
+    --
+    Name: str
+}
 class Notaries{
     ID: int
     --
@@ -46,6 +50,8 @@ class EntryData{
 
 EntryData }-- Client
 EntryData }-- Notaries
+EntryData }-- Admins
+
 Offers }-- CompletedDeals
 CompletedDeals }-- Client
 CompletedDeals }-- Notaries
