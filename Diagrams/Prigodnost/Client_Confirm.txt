@@ -10,6 +10,7 @@ control "Отмена" as back_control
 control "Сохранить документ" as save_control
 control "Подтвердить" as confirm_control
 control "Отобразить окно" as view_control
+control "Ошибка" as error #red
 
 user -- confirm_deal_window
 user -- work_window
@@ -22,6 +23,7 @@ confirm_deal_window --> back_control: Нажата кнопка Отмена
 back_control --> main_window
 confirm_deal_window --> save_control: Нажата кнопка сохранения документа
 confirm_deal_window --> confirm_control: Нажата кнопка Подтвердить
-confirm_control --> DB: Сохранение иземений
+confirm_control --> DB: Сохранение изменений
+confirm_control --> error: Сделка пуста
 
 @enduml
