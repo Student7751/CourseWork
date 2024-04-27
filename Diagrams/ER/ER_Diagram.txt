@@ -47,7 +47,6 @@ class EntryData{
 EntryData }-- Client
 EntryData }-- Notaries
 Offers }-- CompletedDeals
-Offers }-- Notaries
 CompletedDeals }-- Client
 CompletedDeals }-- Notaries
 
