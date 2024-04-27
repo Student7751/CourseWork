@@ -7,8 +7,6 @@ boundary "Окно Редактирования" as update_offer_window
 
 entity "БД услуг" as offers_db
 
-control error as "Ошибка" #red
-
 admin -> main_window : Нажимает кнопку\n'Редактировать услуги'
 
 main_window -> update_offer_window : Отобразить
@@ -21,13 +19,6 @@ offers_db --> update_offer_window : Возврат
 
 admin -> update_offer_window: Нажимает кнопку 'Добавить элемент'
 
-alt Поля некорректны
-    update_offer_window-> error : Отобразить
-    error --> update_offer_window: Возврат
-else Поля корректны
-    update_offer_window-> offers_db : Запись данных
-    offers_db --> update_offer_window : Возврат
-end
 
 opt Нажата кнопка 'Назад'
     admin -> update_offer_window : Нажата кнопка 'Назад'
