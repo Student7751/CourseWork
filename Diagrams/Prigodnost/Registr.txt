@@ -1,6 +1,6 @@
 @startuml
 boundary "Окно регистрации" as registry_window
-boundary "Окно ошибки" as error_window
+boundary "Ошибка" as error_window #red
 boundary "Окно авторизации" as entry_window
 
 actor "Клиент" as user
@@ -11,8 +11,8 @@ control "Подтверждение данных" as validation_control
 
 user -- registry_window
 
-registry_window --> validation_control : Вводит данные и нажимает кнопку "Подтвердить"
-validation_control --> entry_window: Успех
+registry_window --> validation_control : Нажата кнопка\nПодтвердить
+validation_control --> entry_window: Нажата кнопка\nНазад
 validation_control --> error_window: Ошибка ввода данных
 validation_control --> DB: Успех
 
