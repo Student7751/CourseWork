@@ -1,29 +1,30 @@
-@startuml Admin_Update
-
 actor admin as "Администратор"
 
 boundary "Окно роли\nАдминистратора" as main_window
-boundary "Окно добавления нотариусов" as add_notarius_window
+boundary "Окно Редактирования нотариусов" as notarius_update_window
 
 entity "БД нотариусов" as notarius_db
 
 control error as "Ошибка" #red
 
-admin -> add_notarius_window : Нажимает кнопку\n'Редактировать нотариусов'
-admin -> add_notarius_window : Вводит данные
+admin -> main_window : Нажимает кнопку\n'Редактировать нотариусов'
 
-admin -> add_notarius_window: Нажимает кнопку "Подтвердить"
+main_window -> notarius_update_window : Отобразить
+notarius_update_window -> notarius_db : Загрузка данных
+
+admin -> notarius_update_window: Нажимает кнопку 'Добавить элемент'
 
 alt Поля добавления пусты
-    add_notarius_window -> error : Отобразить
-    error --> add_notarius_window : Возврат
+    notarius_update_window-> error : Отобразить
+    error --> notarius_update_window: Возврат
 else Поля добавления не пусты
-    add_notarius_window -> notarius_db : Сохранение данных
+    notarius_update_window-> notarius_db : Сохранение данных
+    notarius_db --> notarius_update_window : Возврат
 end
 
 opt Нажата кнопка 'Назад'
-    admin -> add_notarius_window : Нажата кнопка 'Назад'
-    add_notarius_window -> main_window : Отобразить
+    admin -> notarius_update_window : Нажата кнопка 'Назад'
+    notarius_update_window -> main_window : Отобразить
 end
 
 @enduml
