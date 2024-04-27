@@ -7,7 +7,7 @@ actor "Администратор" as user
 
 control "Назад" as back_control
 control "Загрузка данных" as load_control
-
+control "Ошибка" as error #red
 
 user -- client_view_window
 
@@ -17,5 +17,6 @@ client_view_window --> back_control: Нажата кнопка Назад
 back_control --> main_window
 client_view_window --> load_control
 DB  <-- load_control: Запрос списка клиентов
-
+DB --> client_view_window: Возврат данных
+DB -left-> error: БД пуста
 @enduml
