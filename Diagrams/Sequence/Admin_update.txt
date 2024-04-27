@@ -12,15 +12,10 @@ admin -> main_window : Нажимает кнопку\n'Редактироват�
 main_window -> notarius_update_window : Отобразить
 notarius_update_window -> notarius_db : Загрузка данных
 
-admin -> notarius_update_window: Нажимает кнопку 'Добавить элемент'
+admin -> notarius_update_window: Нажимает кнопку 'Обновить таблицу'
 
-alt Поля добавления пусты
-    notarius_update_window-> error : Отобразить
-    error --> notarius_update_window: Возврат
-else Поля добавления не пусты
-    notarius_update_window-> notarius_db : Сохранение данных
-    notarius_db --> notarius_update_window : Возврат
-end
+notarius_update_window --> notarius_db: Сохранение изменений
+notarius_db --> notarius_update_window: Возврат
 
 opt Нажата кнопка 'Назад'
     admin -> notarius_update_window : Нажата кнопка 'Назад'
