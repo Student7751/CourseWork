@@ -36,13 +36,17 @@ class RegisterWindow(MainWindow):
 
         # Checking input data to correct with all parameters
         if all([InputValidator.checkInitials(initials, self), InputValidator.checkLogin(login, self),
-                InputValidator.checkPass(password, self), InputValidator.checkNumber(number, self), not DB.isLoginExists(login)]):
+                InputValidator.checkPass(password, self), InputValidator.checkNumber(number, self),
+                not DB.isLoginExists(login)]):
+            # Using DB class method to add new user into DataBase
+            if login.endswith("@client.com"):
+                DB.addUser("clients", *initials, number, login, password)
+            else:
+                DB.addUser("notaries", *initials, number, login, password)
+
             QMessageBox.information(self, "Успех", "Пользователь успешно добавлен!")
-            # Using DB class method to add new client into DataBase
-            DB.addClient(*initials, number, login, password)
             return 0
         QMessageBox.warning(self, "Неверные данные", "Данные введены неверно!")
-
 
 
 if __name__ == "__main__":

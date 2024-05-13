@@ -8,12 +8,15 @@ from interfaces import MainWindow
 
 
 class NotaryWindow(MainWindow):
-    def __init__(self, parent=None):
+    def __init__(self, name):
         super().__init__(9)
+        self.ui.welcome.setText(f"Добро пожаловать в систему, {name}!")
+
+        self.ui.exitBtn.clicked.connect(self.exit_btn)
 
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    window = NotaryWindow()
+    window = NotaryWindow("NAME")
     window.show()
     sys.exit(app.exec_())

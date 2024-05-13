@@ -33,29 +33,32 @@ class DB:
 
     # Returning tuple(NAME, SURNAME) of user if it's exists
     @classmethod
-    def getClientByLog(cls, login, password):
+    def getUser(cls, table, login, password):
         # Creating query to get client data
         query = f"""
             SELECT NAME, SURNAME
-            FROM CLIENTS JOIN ENTRYDATA
-            WHERE ENTRYDATA.LOGIN = "{login}" AND ENTRYDATA.PASSWORD = "{password}"
-            AND CLIENTS.ID = ENTRYDATA.ID
+            FROM {table} JOIN ENTRYDATA
+            ON {table}.ID = ENTRYDATA.ID
+            WHERE ENTRYDATA.LOGIN = ? AND ENTRYDATA.PASSWORD = ?
             """
-        # Executing query
-        res = cls.cur.execute(query)
+        # Executing query with parameters
+        cls.cur.execute(query, (login, password))
+        # Fetching result
+        res = cls.cur.fetchone()
         # Returning result
-        return tuple(res)
+        return res if res else ()
 
     @classmethod
-    def getAdminByLog(cls, login, password):
-        pass
+    def getUsers(cls, table):
+        query = f"SELECT * FROM {table}"
+        return tuple(cls.cur.execute(query))
 
     # Adding client into DataBase
     @classmethod
-    def addClient(cls, name, surname, patronymic, phone_number, login, password):
+    def addUser(cls, table, name, surname, patronymic, phone_number, login, password):
         # Adding client into Clients table
-        insertClients = """
-                INSERT INTO Clients(SURNAME, NAME, PATRONYMIC, PHONE_NUMBER)
+        insertClients = f"""
+                INSERT INTO {table}(SURNAME, NAME, PATRONYMIC, PHONE_NUMBER)
                 VALUES (?,?,?,?)
                 """
         # Adding client private data into ENTRYDATA table
@@ -63,10 +66,10 @@ class DB:
             INSERT INTO ENTRYDATA(ID, LOGIN, PASSWORD)
             VALUES (?,?,?)
             """
-        # Getting ID of added client to insert it into ENTRYDATA table
-        last_inserted_id = cls.cur.lastrowid
         # Execute queries to tables
         cls.cur.execute(insertClients, (surname, name, patronymic, phone_number))
+        # Getting ID of added client to insert it into ENTRYDATA table
+        last_inserted_id = cls.cur.lastrowid
         cls.cur.execute(insertEntryData, (last_inserted_id, login, password))
         # Commit changes into main DataBase
         cls.db.commit()
