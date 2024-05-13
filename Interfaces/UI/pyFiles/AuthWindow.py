@@ -24,13 +24,7 @@ class AuthWindow(MainWindow):
         super().__init__(0)
 
         self.ui.AuthBtn.clicked.connect(self.toRoleWindow)
-        self.ui.RegistrBtn.clicked.connect(self.toRegisterWindow)
-
-    # Opening Register Window
-    def toRegisterWindow(self):
-        self.close()
-        self.RW = RegisterWindow()
-        self.RW.show()
+        self.ui.RegistrBtn.clicked.connect(lambda: self.openWindow(RegisterWindow()))
 
     # Getting a role by login postfix
     def getUserRole(self, login):
@@ -57,12 +51,8 @@ class AuthWindow(MainWindow):
         res = self.authenticateUser(login, password)
         # If result is not None and tuple with data is not Empty
         if res and res[0]:
-            # Creating a role-dependent window
-            self.roleWindow = self.ROLE_WINDOWS.get(res[1])(res[0][0])
-            # Close current window
-            self.close()
-            # Show role window
-            self.roleWindow.show()
+            # Open role window
+            self.openWindow(self.ROLE_WINDOWS.get(res[1])(res[0][0]))
         else:
             QMessageBox.warning(self, "Неверные данные", "Неверный логин или пароль!")
 
