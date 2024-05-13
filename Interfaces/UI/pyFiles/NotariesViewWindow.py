@@ -8,6 +8,8 @@ from interfaces import MainWindow
 from mainTableModel import TableModel
 from DB import DB
 
+# Importing linked class
+from NotaryAddWindow import NotaryAddWindow
 class NotariesViewWindow(MainWindow):
     def __init__(self, parent=None):
         super().__init__(2)
@@ -17,6 +19,7 @@ class NotariesViewWindow(MainWindow):
         # Connecting buttons for its functions
         self.ui.updateBtn.clicked.connect(self.updateTable)
         self.ui.backBtn.clicked.connect(self.toMainWindow)
+        self.ui.addBtn.clicked.connect(lambda: self.openWindow(NotaryAddWindow()))
 
     # Updating table
     def updateTable(self):

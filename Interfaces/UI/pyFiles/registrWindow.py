@@ -19,15 +19,17 @@ class RegisterWindow(MainWindow):
 
         self.ui.cancelBtn.clicked.connect(self.exit_btn)
         self.ui.registrBtn.clicked.connect(self.addUser)
+        self.checkingInput()
 
-        # Checking input data
-        self.ui.passEdit.textChanged.connect(lambda: InputValidator.checkPass(self.ui.passEdit.text(), self))
-        self.ui.logEdit.textChanged.connect(lambda: InputValidator.checkLogin(self.ui.logEdit.text(), self))
-        self.ui.numberEdit.textChanged.connect(lambda: InputValidator.checkNumber(self.ui.numberEdit.text(), self))
-        self.ui.initialsEdit.textChanged.connect(lambda: InputValidator.checkInitials(self.ui.initialsEdit.text().split(), self))
+    def checkingInput(self, type=0):
+            # Checking input data
+            self.ui.passEdit.textChanged.connect(lambda: InputValidator.checkPass(self.ui.passEdit.text(), self))
+            self.ui.logEdit.textChanged.connect(lambda: InputValidator.checkLogin(self.ui.logEdit.text(), self, type))
+            self.ui.numberEdit.textChanged.connect(lambda: InputValidator.checkNumber(self.ui.numberEdit.text(), self))
+            self.ui.initialsEdit.textChanged.connect(lambda: InputValidator.checkInitials(self.ui.initialsEdit.text().split(), self))
 
     # Checking input values and adding user to DB
-    def addUser(self):
+    def addUser(self, type=0):
         # Reading input data
         initials = self.ui.initialsEdit.text().split()
         login = self.ui.logEdit.text()
@@ -35,7 +37,7 @@ class RegisterWindow(MainWindow):
         number = self.ui.numberEdit.text()
 
         # Checking input data to correct with all parameters
-        if all([InputValidator.checkInitials(initials, self), InputValidator.checkLogin(login, self),
+        if all([InputValidator.checkInitials(initials, self), InputValidator.checkLogin(login, self, type),
                 InputValidator.checkPass(password, self), InputValidator.checkNumber(number, self),
                 not DB.isLoginExists(login)]):
             # Using DB class method to add new user into DataBase

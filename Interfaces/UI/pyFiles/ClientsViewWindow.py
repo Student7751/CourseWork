@@ -19,7 +19,7 @@ class ClientsViewWindow(MainWindow):
     # Opening main window for this window
     def toMainWindow(self):
         from AdminWindow import AdminWindow
-        self.openWindow(AdminWindow())
+        self.openWindow(AdminWindow("name"))
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)

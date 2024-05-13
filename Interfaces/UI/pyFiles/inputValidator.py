@@ -14,9 +14,11 @@ class InputValidator:
         return len(txt) == 16
 
     @staticmethod
-    def checkLogin(login, window):
-        if not (login.endswith("@client.com") or login.endswith("@notary.com")):
+    def checkLogin(login, window, type=0):
+        if not (login.endswith("@client.com") or login.endswith("@notary.com")) and type == 0:
             txt = "Не найден один из постфиксов: @client.com или @notary.com"
+        elif not (login.endswith("notary.com")) and type == 1:
+                txt = "Не найден постфикс: @notary.com"
         else:
             txt = "Логин подходит!"
         window.ui.logLine.setText(txt)
