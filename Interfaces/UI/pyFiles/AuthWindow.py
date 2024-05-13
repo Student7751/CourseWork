@@ -11,13 +11,15 @@ from DB import DB
 from ClientWindow import ClientWindow
 from registrWindow import RegisterWindow
 from notaryWindow import NotaryWindow
+from AdminWindow import AdminWindow
 
 
 class AuthWindow(MainWindow):
     # Role:Window dictionary
     ROLE_WINDOWS = {
         "CLIENTS": ClientWindow,
-        "NOTARIES": NotaryWindow
+        "NOTARIES": NotaryWindow,
+        "ADMINS": AdminWindow
     }
 
     def __init__(self, parent=None):
@@ -32,6 +34,8 @@ class AuthWindow(MainWindow):
             return "CLIENTS"
         elif login.endswith("@notary.com"):
             return "NOTARIES"
+        elif login.endswith("@admin.com"):
+            return "ADMINS"
         else:
             return None
 

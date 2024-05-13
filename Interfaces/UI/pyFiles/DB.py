@@ -25,12 +25,6 @@ class DB:
         # Executing query
         return cls.cur.execute(query).fetchone() is not None
 
-    # Getting data from private table ENTRYDATA
-    @classmethod
-    def getEntryData(cls):
-        query = "SELECT * FROM ENTRYDATA"
-        return tuple(cls.cur.execute(query))
-
     # Returning tuple(NAME, SURNAME) of user if it's exists
     @classmethod
     def getUser(cls, table, login, password):
@@ -48,14 +42,15 @@ class DB:
         # Returning result
         return res if res else ()
 
+    # Getting data from any table
     @classmethod
     def getUsers(cls, table):
         query = f"SELECT * FROM {table}"
-        return tuple(cls.cur.execute(query))
+        return cls.cur.execute(query).fetchall()
 
     # Adding client into DataBase
     @classmethod
-    def addUser(cls, table, name, surname, patronymic, phone_number, login, password):
+    def addUser(cls, table, surname, name, patronymic, phone_number, login, password):
         # Adding client into Clients table
         insertClients = f"""
                 INSERT INTO {table}(SURNAME, NAME, PATRONYMIC, PHONE_NUMBER)
@@ -73,3 +68,20 @@ class DB:
         cls.cur.execute(insertEntryData, (last_inserted_id, login, password))
         # Commit changes into main DataBase
         cls.db.commit()
+
+    # Delete user from any table in the database
+    @classmethod
+    def deleteUser(cls, userID, table):
+        # Query to delete user from his own table
+        query = f"DELETE FROM {table} WHERE ID = {userID}"
+        # Deleting data from a private table depending on the postfix
+        if table == "notaries":
+            query2 = f"DELETE FROM ENTRYDATA WHERE LOGIN like '%@notary.com' and ID = {userID}"
+        else:
+            query2 = f"DELETE FROM ENTRYDATA WHERE LOGIN like '%@client.com' and ID = {userID}"
+        # Executing queries
+        cls.cur.execute(query)
+        cls.cur.execute(query2)
+
+        # Commit changes into main Database
+        #cls.db.commit()
