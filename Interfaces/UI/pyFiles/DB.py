@@ -30,7 +30,7 @@ class DB:
     def getUser(cls, table, login, password):
         # Creating query to get client data
         query = f"""
-            SELECT NAME, SURNAME
+            SELECT {table}.NAME, {table}.SURNAME
             FROM {table} JOIN ENTRYDATA
             ON {table}.ID = ENTRYDATA.ID
             WHERE ENTRYDATA.LOGIN = ? AND ENTRYDATA.PASSWORD = ?
@@ -73,15 +73,15 @@ class DB:
     @classmethod
     def deleteUser(cls, userID, table):
         # Query to delete user from his own table
-        query = f"DELETE FROM {table} WHERE ID = {userID}"
+        query = f"DELETE FROM {table} WHERE ID = ?"
         # Deleting data from a private table depending on the postfix
         if table == "notaries":
-            query2 = f"DELETE FROM ENTRYDATA WHERE LOGIN like '%@notary.com' and ID = {userID}"
+            query2 = f"DELETE FROM ENTRYDATA WHERE LOGIN like '%@notary.com' and ID = ?"
         else:
-            query2 = f"DELETE FROM ENTRYDATA WHERE LOGIN like '%@client.com' and ID = {userID}"
+            query2 = f"DELETE FROM ENTRYDATA WHERE LOGIN like '%@client.com' and ID = ?"
         # Executing queries
-        cls.cur.execute(query)
-        cls.cur.execute(query2)
+        cls.cur.execute(query, (userID, ))
+        cls.cur.execute(query2, (userID, ))
 
         # Commit changes into main Database
-        #cls.db.commit()
+        cls.db.commit()
