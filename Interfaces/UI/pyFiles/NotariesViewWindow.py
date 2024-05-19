@@ -25,12 +25,14 @@ class NotariesViewWindow(MainWindow):
     def updateTable(self):
         # Flag needs to determine when any checkbox is activated
         isAnyChecked = False
-
         # Going to each row on the table
         for row in range(self.ui.NotariesTable.rowCount()):
-            # Insert widget for the checkbox object
+            # Getting widget from the first column
             item = self.ui.NotariesTable.cellWidget(row, 0)
-            if item.isChecked():
+            # Getting checkbox from the widget
+            cb = item.layout().itemAt(0).widget()
+
+            if cb.isChecked():
                 # Determine checkbox changes
                 isAnyChecked = True
                 # Getting ID from row needs to delete
