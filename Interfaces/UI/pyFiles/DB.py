@@ -25,12 +25,12 @@ class DB:
         # Executing query
         return cls.cur.execute(query).fetchone() is not None
 
-    # Returning tuple(NAME, SURNAME) of user if it's exists
+    # Returning tuple(ID, NAME, SURNAME) of user if it's exists
     @classmethod
     def getUser(cls, table, login, password):
         # Creating query to get client data
         query = f"""
-            SELECT {table}.NAME, {table}.SURNAME
+            SELECT {table}.ID, {table}.NAME, {table}.SURNAME
             FROM {table} JOIN ENTRYDATA
             ON {table}.ID = ENTRYDATA.ID
             WHERE ENTRYDATA.LOGIN = ? AND ENTRYDATA.PASSWORD = ?
@@ -74,6 +74,21 @@ class DB:
         cls.cur.execute(insertEntryData, (last_inserted_id, login, password))
         # Commit changes into main DataBase
         cls.db.commit()
+
+    # Adding deal into table
+    @classmethod
+    def addDeal(cls, date, name, discount, price, notaryID, clientID):
+        # Separating several deals
+        name = "; ".join(name)
+        # Adding new deal
+        query = """
+                INSERT INTO COMPLETEDDEALS(NAME, DATE, DISCOUNT, PRICE, NOTARY_ID, CLIENT_ID)
+                VALUES (?,?,?,?,?,?)
+            """
+        # Executing query
+        cls.cur.execute(query, (name, date, discount, price, notaryID, clientID))
+        # Commit changes into main Database
+        #cls.db.commit()
 
     # Delete user from any table in the database
     @classmethod
