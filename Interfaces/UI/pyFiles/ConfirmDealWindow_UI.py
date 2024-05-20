@@ -12,26 +12,27 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 
 class Ui_ConfirmDealWindow(object):
-    def setupUi(self, MainWindow):
-        MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(805, 542)
-        self.centralwidget = QtWidgets.QWidget(MainWindow)
+    def setupUi(self, ConfirmDealWindow):
+        ConfirmDealWindow.setObjectName("ConfirmDealWindow")
+        ConfirmDealWindow.resize(805, 542)
+        self.centralwidget = QtWidgets.QWidget(ConfirmDealWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.label = QtWidgets.QLabel(self.centralwidget)
         self.label.setGeometry(QtCore.QRect(-6, -5, 811, 591))
         self.label.setStyleSheet("background-color: qlineargradient(spread:reflect, x1:0.0201244, y1:0.96, x2:1, y2:0, stop:0.0746269 rgba(74, 74, 74, 255), stop:0.950249 rgba(197, 197, 197, 255));")
         self.label.setText("")
         self.label.setObjectName("label")
-        self.textEdit = QtWidgets.QTextEdit(self.centralwidget)
-        self.textEdit.setGeometry(QtCore.QRect(23, 46, 761, 421))
-        self.textEdit.setStyleSheet("border-radius: 10px;\n"
+        self.aboutOffer = QtWidgets.QTextEdit(self.centralwidget)
+        self.aboutOffer.setGeometry(QtCore.QRect(23, 46, 761, 421))
+        self.aboutOffer.setStyleSheet("border-radius: 10px;\n"
 "background: white;")
-        self.textEdit.setReadOnly(True)
-        self.textEdit.setTextInteractionFlags(QtCore.Qt.NoTextInteraction)
-        self.textEdit.setObjectName("textEdit")
+        self.aboutOffer.setReadOnly(True)
+        self.aboutOffer.setTextInteractionFlags(QtCore.Qt.NoTextInteraction)
+        self.aboutOffer.setObjectName("aboutOffer")
         self.label_2 = QtWidgets.QLabel(self.centralwidget)
-        self.label_2.setGeometry(QtCore.QRect(320, 20, 141, 16))
+        self.label_2.setGeometry(QtCore.QRect(320, 20, 161, 16))
         font = QtGui.QFont()
+        font.setPointSize(9)
         font.setBold(True)
         font.setWeight(75)
         self.label_2.setFont(font)
@@ -70,15 +71,20 @@ class Ui_ConfirmDealWindow(object):
 "background-color: rgb(255, 192, 66);\n"
 "border: 1px solid #000000")
         self.downloadBtn.setObjectName("downloadBtn")
-        MainWindow.setCentralWidget(self.centralwidget)
+        ConfirmDealWindow.setCentralWidget(self.centralwidget)
 
-        self.retranslateUi(MainWindow)
-        QtCore.QMetaObject.connectSlotsByName(MainWindow)
+        self.retranslateUi(ConfirmDealWindow)
+        QtCore.QMetaObject.connectSlotsByName(ConfirmDealWindow)
 
-    def retranslateUi(self, MainWindow):
+    def retranslateUi(self, ConfirmDealWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.label_2.setText(_translate("MainWindow", "Документ о сделке"))
-        self.cancelBtn.setText(_translate("MainWindow", "Отменить сделку"))
-        self.confirmBtn.setText(_translate("MainWindow", "Подтвердить"))
-        self.downloadBtn.setText(_translate("MainWindow", "Скачать документ"))
+        ConfirmDealWindow.setWindowTitle(_translate("ConfirmDealWindow", "MainWindow"))
+        self.aboutOffer.setHtml(_translate("ConfirmDealWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:7.8pt; font-weight:400; font-style:normal;\">\n"
+"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:11pt;\">Данный документ подтверждает совершение сделки. Ниже перечислены подробные сведения о сделке. Пожалуйста, прежде чем приступать к оформлению сделки ознакомьтесь с данным документом! После подтверждения сделки она вступает в силу и её отмена невозможна. В случае каких-либо проблем с любыми вопросами обращаться к нотариусу с которым была заключена сделка. Подробные сведения:</span></p></body></html>"))
+        self.label_2.setText(_translate("ConfirmDealWindow", "Документ о сделке"))
+        self.cancelBtn.setText(_translate("ConfirmDealWindow", "Отменить сделку"))
+        self.confirmBtn.setText(_translate("ConfirmDealWindow", "Подтвердить"))
+        self.downloadBtn.setText(_translate("ConfirmDealWindow", "Скачать документ"))

@@ -45,6 +45,29 @@ class TableModel(DB):
             for column_index in range(column_count - a):
                 # Creating data item
                 item = QTableWidgetItem(str(row_data[column_index]))
-                #item.setTextAlignment(QtCore.Qt.AlignVCenter | QtCore.Qt.AlignHCenter)
+                item.setTextAlignment(QtCore.Qt.AlignVCenter | QtCore.Qt.AlignHCenter)
                 # insert item to table
                 table_widget.setItem(row_index, column_index + a, item)
+
+    # Getting data of the checked rows
+    @staticmethod
+    def getCheckedItems(table):
+        # Creating list with the results
+        data = list()
+
+        for row in range(table.rowCount()):
+            # Getting widget from the first column
+            item = table.cellWidget(row, 0)
+            # Getting checkbox from the widget
+            cb = item.layout().itemAt(0).widget()
+            if cb.isChecked():
+                # Creating temp list with row data
+                lst = list()
+                # Starting iteration by columns (-1 and +1 needs to skip checkbox object)
+                for column in range(table.columnCount() - 1):
+                    # Appending data to the temp list
+                    lst.append(table.item(row, column + 1).text())
+                # Appending temp list to the result list
+                data.append(lst)
+        # Returning result list
+        return data

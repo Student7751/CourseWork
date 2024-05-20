@@ -48,6 +48,12 @@ class DB:
         query = f"SELECT * FROM {table}"
         return cls.cur.execute(query).fetchall()
 
+    # Getting notary data from table
+    @classmethod
+    def getNotariesNames(cls):
+        query = "SELECT ID, NAME, SURNAME, PATRONYMIC FROM NOTARIES"
+        return cls.cur.execute(query).fetchall()
+
     # Adding client into DataBase
     @classmethod
     def addUser(cls, table, surname, name, patronymic, phone_number, login, password):
@@ -85,3 +91,4 @@ class DB:
 
         # Commit changes into main Database
         cls.db.commit()
+
