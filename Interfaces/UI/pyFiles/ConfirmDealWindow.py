@@ -29,12 +29,12 @@ class ConfirmDealWindow(MainWindow):
     def confirmDeal(self):
         # Adding deal parameters into table
         DB.addDeal(self.data["Дата"], self.data["Название услуг/(-и)"], self.data["Скидка"],
-                   self.data["Сумма сделки"], self.data["NotaryID"], self.data["UserID"])
+                   self.data["Сумма сделки"], self.data["UserID"], self.data["NotaryID"])
         # Message that adding done
         QMessageBox.information(self, "Уведомление", "Сделка успешно совершена!")
         # Returning to the main window
         self.toMainWindow()
-    
+
     # Filling edit
     def fillData(self):
         # Filling the edit about offer

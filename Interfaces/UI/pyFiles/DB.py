@@ -48,6 +48,15 @@ class DB:
         query = f"SELECT * FROM {table}"
         return cls.cur.execute(query).fetchall()
 
+    # Getting data to view completed deals
+    @classmethod
+    def getNotariesNameByID(cls, ID):
+        query = f"""
+        SELECT Completeddeals.ID, Completeddeals.Name, Discount, Notaries.Name, Price, Date
+        FROM completeddeals join Notaries on Notaries.ID = completeddeals.Notary_ID and Client_ID = {ID}
+        """
+        return cls.cur.execute(query).fetchall()
+
     # Getting notary data from table
     @classmethod
     def getNotariesNames(cls):
@@ -77,16 +86,16 @@ class DB:
 
     # Adding deal into table
     @classmethod
-    def addDeal(cls, date, name, discount, price, notaryID, clientID):
+    def addDeal(cls, date, name, discount, price, clientID, notaryID):
         # Separating several deals
         name = "; ".join(name)
         # Adding new deal
         query = """
-                INSERT INTO COMPLETEDDEALS(NAME, DATE, DISCOUNT, PRICE, NOTARY_ID, CLIENT_ID)
+                INSERT INTO COMPLETEDDEALS(NAME, DATE, DISCOUNT, PRICE, CLIENT_ID, NOTARY_ID)
                 VALUES (?,?,?,?,?,?)
             """
         # Executing query
-        cls.cur.execute(query, (name, date, discount, price, notaryID, clientID))
+        cls.cur.execute(query, (name, date, discount, price, clientID, notaryID))
         # Commit changes into main Database
         #cls.db.commit()
 

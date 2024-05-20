@@ -26,9 +26,13 @@ class TableModel(DB):
 
     # Filling any table
     @staticmethod
-    def fillTable(table_widget, table, a=0):
-        # Getting tuple with the data by table name
-        data = DB.getUsers(table)
+    def fillTable(table_widget, table, a=0, b=0):
+        # b - is a ID of client and needs to determine what type of table we gets
+        if b:
+            data = DB.getNotariesNameByID(b)
+        else:
+            # Getting tuple with the data by table name
+            data = DB.getUsers(table)
         # Getting row count and column count
         table_widget.setRowCount(len(data))
         column_count = table_widget.columnCount()
