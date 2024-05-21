@@ -27,6 +27,8 @@ class Ui_DealAddWindow(object):
         self.dealName.setStyleSheet("border-radius: 10px;")
         self.dealName.setObjectName("dealName")
         self.dealPrice = QtWidgets.QLineEdit(self.centralwidget)
+        self.dealPrice.setValidator(QtGui.QIntValidator())
+        self.dealPrice.setMaxLength(5)
         self.dealPrice.setGeometry(QtCore.QRect(390, 30, 131, 31))
         self.dealPrice.setStyleSheet("border-radius: 10px;")
         self.dealPrice.setObjectName("dealPrice")

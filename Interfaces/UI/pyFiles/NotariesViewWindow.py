@@ -21,22 +21,11 @@ class NotariesViewWindow(MainWindow):
         self.ui.backBtn.clicked.connect(self.toMainWindow)
         self.ui.addBtn.clicked.connect(lambda: self.openWindow(NotaryAddWindow()))
 
-    # Updating table
+    # Updating table by user TableModel function
     def updateTable(self):
-        # Getting checked rows data
-        res = TableModel.getCheckedItems(self.ui.NotariesTable)
-        # If any checked row exists
-        if res:
-            # Starting iteration by data list
-            for i in res:
-                # Deleting user by ID
-                DB.deleteUser(i[0], "notaries")
-                # Updating table
-                TableModel.fillTable(self.ui.NotariesTable, "notaries", 1)
-            # Returning value to exit the function
-            return 0
-        # Creating message if nothing has been checked
-        QMessageBox.information(self, "Уведомление", "Нечего обновлять")
+        if TableModel.updateTable(self.ui.NotariesTable, "notaries") is None:
+            # Creating message if nothing has been checked
+            QMessageBox.information(self, "Уведомление", "Нечего обновлять")
 
     # Opening main window for this window
     def toMainWindow(self):

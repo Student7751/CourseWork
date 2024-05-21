@@ -8,13 +8,18 @@ from interfaces import MainWindow
 
 # Importing linked classes
 from ClientsViewWindow import ClientsViewWindow
+from dealsViewWindow import DealsViewWindow
+
 
 class NotaryWindow(MainWindow):
     def __init__(self, userData=(1,"Name", "surname")):
         super().__init__(9)
-        self.ui.welcome.setText(f"Добро пожаловать в систему, {userData[1]}!")
 
+        # Displaying welcome text
+        self.ui.welcome.setText(f"Добро пожаловать в систему, {userData[1]}!")
+        # Connecting signals to slots
         self.ui.clientListBtn.clicked.connect(lambda: self.openWindow(ClientsViewWindow(1)))
+        self.ui.editDealBtn.clicked.connect(lambda: self.openWindow(DealsViewWindow()))
         self.ui.exitBtn.clicked.connect(self.exit_btn)
 
 

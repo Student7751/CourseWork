@@ -75,3 +75,20 @@ class TableModel(DB):
                 data.append(lst)
         # Returning result list
         return data
+
+    @staticmethod
+    # Deletion record from table
+    def updateTable(table, tableName):
+        # Getting checked rows data
+        res = TableModel.getCheckedItems(table)
+        # If any checked row exists
+        if res:
+            # Starting iteration by data list
+            for i in res:
+                # Deleting user by ID
+                DB.deleteUser(i[0], tableName)
+                # Updating table
+                TableModel.fillTable(table, tableName, 1)
+            # Returning value to exit the function
+            return 0
+        return None

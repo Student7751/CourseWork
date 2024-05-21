@@ -83,6 +83,18 @@ class DB:
         cls.cur.execute(insertEntryData, (last_inserted_id, login, password))
         # Commit changes into main DataBase
         cls.db.commit()
+    # Adding offer into table
+    @classmethod
+    def addOffer(cls, name, descr, price):
+        # Adding new record into table
+        query = """
+            INSERT INTO OFFERS(NAME, DESCR, PRICE)
+            VALUES (?, ?, ?)
+        """
+        # Executing the query
+        cls.cur.execute(query, (name, descr, price))
+        # Commit changes into main Database
+        #cls.db.commit()
 
     # Adding deal into table
     @classmethod
