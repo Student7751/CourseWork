@@ -9,8 +9,9 @@ from mainTableModel import TableModel
 
 
 class ClientsViewWindow(MainWindow):
-    def __init__(self):
+    def __init__(self, wt=0):
         super().__init__(12)
+        self.wt = wt
         self.ui.backBtn.clicked.connect(self.toMainWindow)
 
         # Filling the table
@@ -18,8 +19,12 @@ class ClientsViewWindow(MainWindow):
 
     # Opening main window for this window
     def toMainWindow(self):
-        from AdminWindow import AdminWindow
-        self.openWindow(AdminWindow("name"))
+        if self.wt:
+            from notaryWindow import NotaryWindow
+            self.openWindow(NotaryWindow())
+        else:
+            from AdminWindow import AdminWindow
+            self.openWindow(AdminWindow("name"))
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
