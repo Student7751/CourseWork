@@ -19,7 +19,7 @@ class NotaryWindow(MainWindow):
         self.ui.welcome.setText(f"Добро пожаловать в систему, {userData[2]}!")
         # Connecting signals to slots
         self.ui.clientListBtn.clicked.connect(lambda: self.openWindow(NotaryClientsViewWindow()))
-        self.ui.editDealBtn.clicked.connect(lambda: self.openWindow(DealsViewWindow()))
+        self.ui.editDealBtn.clicked.connect(lambda: self.openWindow(DealsViewWindow(userData)))
         self.ui.toProfileBtn.clicked.connect(lambda : self.openWindow(ProfileWindow(1, userData + ("notaries", ))))
         self.ui.exitBtn.clicked.connect(self.exit_btn)
 

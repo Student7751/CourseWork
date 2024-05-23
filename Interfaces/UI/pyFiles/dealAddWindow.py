@@ -8,8 +8,11 @@ from interfaces import MainWindow
 from DB import DB
 
 class DealAddWindow(MainWindow):
-    def __init__(self, parent=None):
+    def __init__(self, userData=()):
         super().__init__(10)
+
+        self.userData = userData
+
         # Connecting signals to slots
         self.ui.cancelBtn.clicked.connect(self.toMainWindow)
         self.ui.addDealBtn.clicked.connect(self.addDeal)
@@ -22,10 +25,10 @@ class DealAddWindow(MainWindow):
         dealDescr = self.ui.dealDescr.toPlainText()
         # If all fields are filled
         if dealName and dealPrice and dealDescr:
-            # Adding new deal into table
-            DB.addOffer(dealName, dealDescr, dealPrice)
+            # Adding deal into unconfirmed table
+            DB.addUnconfRecord(self.userData[0], "Добавление заявки", ";".join([dealName, dealDescr, dealPrice]))
             # Notify that everything in order
-            QMessageBox.information(self, "Уведомление", "Услуга успешно добавлена!")
+            QMessageBox.information(self, "Уведомление", "Услуга добавлена к рассмотрению!")
             # Open main window for this window
             self.toMainWindow()
         else:
@@ -35,7 +38,7 @@ class DealAddWindow(MainWindow):
     # Opening main window for this window
     def toMainWindow(self):
         from dealsViewWindow import DealsViewWindow
-        self.openWindow(DealsViewWindow())
+        self.openWindow(DealsViewWindow(self.userData))
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)

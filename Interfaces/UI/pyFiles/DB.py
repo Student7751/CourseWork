@@ -124,6 +124,25 @@ class DB:
         # Commit changes into main Database
         #cls.db.commit()
 
+    # Adding record to table
+    @classmethod
+    def addUnconfRecord(cls, userID, type, descr):
+        query = """
+                INSERT INTO UnconfirmedRecords(USER_ID, TYPE, DESCRIPTION)
+                VALUES (?,?,?)
+            """
+        cls.cur.execute(query, (userID, type, descr))
+
+        #cls.db.commit()
+    # Getting description from table by ID
+    @classmethod
+    def getUnconfRecordDescr(cls, recordID):
+        query = """
+                SELECT DESCRIPTION FROM UnconfirmedRecords
+                WHERE ID = ?
+            """
+        return cls.cur.execute(query, (recordID, )).fetchone()
+
     # Delete user from any table in the database
     @classmethod
     def deleteUser(cls, userID, table):

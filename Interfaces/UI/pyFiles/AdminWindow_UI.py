@@ -12,10 +12,10 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 
 class Ui_AdminWindow(object):
-    def setupUi(self, MainWindow):
-        MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(482, 405)
-        self.centralwidget = QtWidgets.QWidget(MainWindow)
+    def setupUi(self, AdminWindow):
+        AdminWindow.setObjectName("AdminWindow")
+        AdminWindow.resize(482, 464)
+        self.centralwidget = QtWidgets.QWidget(AdminWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.label = QtWidgets.QLabel(self.centralwidget)
         self.label.setGeometry(QtCore.QRect(-6, -5, 631, 481))
@@ -34,7 +34,7 @@ class Ui_AdminWindow(object):
 "border: 1px solid #000000")
         self.toEditNotaryWindow.setObjectName("toEditNotaryWindow")
         self.toAuthWindow = QtWidgets.QPushButton(self.centralwidget)
-        self.toAuthWindow.setGeometry(QtCore.QRect(80, 310, 321, 41))
+        self.toAuthWindow.setGeometry(QtCore.QRect(80, 380, 321, 41))
         font = QtGui.QFont()
         font.setBold(True)
         font.setWeight(75)
@@ -71,16 +71,28 @@ class Ui_AdminWindow(object):
         self.label_3.setFont(font)
         self.label_3.setStyleSheet("color: rgb(38, 18, 148);")
         self.label_3.setObjectName("label_3")
-        MainWindow.setCentralWidget(self.centralwidget)
+        self.toRecordsBtn = QtWidgets.QPushButton(self.centralwidget)
+        self.toRecordsBtn.setGeometry(QtCore.QRect(80, 310, 321, 41))
+        font = QtGui.QFont()
+        font.setBold(True)
+        font.setWeight(75)
+        self.toRecordsBtn.setFont(font)
+        self.toRecordsBtn.setStyleSheet("border-color: rgb(255, 249, 62);\n"
+"border-radius: 20px;\n"
+"background-color: rgb(255, 192, 66);\n"
+"border: 1px solid #000000")
+        self.toRecordsBtn.setObjectName("toRecordsBtn")
+        AdminWindow.setCentralWidget(self.centralwidget)
 
-        self.retranslateUi(MainWindow)
-        QtCore.QMetaObject.connectSlotsByName(MainWindow)
+        self.retranslateUi(AdminWindow)
+        QtCore.QMetaObject.connectSlotsByName(AdminWindow)
 
-    def retranslateUi(self, MainWindow):
+    def retranslateUi(self, AdminWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.toEditNotaryWindow.setText(_translate("MainWindow", "РЕДАКТИРОВАТЬ НОТАРИУСОВ"))
-        self.toAuthWindow.setText(_translate("MainWindow", "ВЫХОД"))
-        self.toClientsViewWindow.setText(_translate("MainWindow", "ПРОСМОТРЕТЬ СПИСОК КЛИЕНТОВ"))
-        self.label_2.setText(_translate("MainWindow", "Добро пожаловать в систему, username!"))
-        self.label_3.setText(_translate("MainWindow", "Выберите действие"))
+        AdminWindow.setWindowTitle(_translate("AdminWindow", "MainWindow"))
+        self.toEditNotaryWindow.setText(_translate("AdminWindow", "РЕДАКТИРОВАТЬ НОТАРИУСОВ"))
+        self.toAuthWindow.setText(_translate("AdminWindow", "ВЫХОД"))
+        self.toClientsViewWindow.setText(_translate("AdminWindow", "ПРОСМОТРЕТЬ СПИСОК КЛИЕНТОВ"))
+        self.label_2.setText(_translate("AdminWindow", "Добро пожаловать в систему, username!"))
+        self.label_3.setText(_translate("AdminWindow", "Выберите действие"))
+        self.toRecordsBtn.setText(_translate("AdminWindow", "ПРОСМОТРЕТЬ СПИСОК ЗАЯВОК"))
