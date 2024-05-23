@@ -45,7 +45,7 @@ class ProfileWindow(MainWindow):
         # If any field was changed
         if not (set(newData) <= set(userData)):
             # If all fields are correct
-            if RegisterWindow.isCorrectFields(self, *newData):
+            if RegisterWindow.isCorrectFields(self, *newData, self.wt):
                 # Updating table, [-1] - table name, [0] - user ID
                 DB.updateTable(userData[-1], userData[0], *newData)
                 # Notification that everything was successful

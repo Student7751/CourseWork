@@ -46,7 +46,7 @@ class RegisterWindow(MainWindow):
                     InputValidator.checkPass(password, self), InputValidator.checkNumber(number, self)])
 
     # Checking input values and adding user to DB
-    def addUser(self, type=0):
+    def addUser(self):
         # Reading input data
         surname, name, patronymic, number, login, password = self.getDataFromFields()
 

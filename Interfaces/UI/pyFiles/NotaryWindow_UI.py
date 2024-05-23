@@ -12,10 +12,10 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 
 class Ui_NotaryWindow(object):
-    def setupUi(self, MainWindow):
-        MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(522, 396)
-        self.centralwidget = QtWidgets.QWidget(MainWindow)
+    def setupUi(self, NotaryWindow):
+        NotaryWindow.setObjectName("NotaryWindow")
+        NotaryWindow.resize(479, 434)
+        self.centralwidget = QtWidgets.QWidget(NotaryWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.label = QtWidgets.QLabel(self.centralwidget)
         self.label.setGeometry(QtCore.QRect(-6, -5, 631, 481))
@@ -23,7 +23,7 @@ class Ui_NotaryWindow(object):
         self.label.setText("")
         self.label.setObjectName("label")
         self.editDealBtn = QtWidgets.QPushButton(self.centralwidget)
-        self.editDealBtn.setGeometry(QtCore.QRect(130, 220, 281, 41))
+        self.editDealBtn.setGeometry(QtCore.QRect(110, 220, 281, 41))
         font = QtGui.QFont()
         font.setBold(True)
         font.setWeight(75)
@@ -34,7 +34,7 @@ class Ui_NotaryWindow(object):
 "border: 1px solid #000000")
         self.editDealBtn.setObjectName("editDealBtn")
         self.exitBtn = QtWidgets.QPushButton(self.centralwidget)
-        self.exitBtn.setGeometry(QtCore.QRect(130, 280, 281, 41))
+        self.exitBtn.setGeometry(QtCore.QRect(110, 340, 281, 41))
         font = QtGui.QFont()
         font.setBold(True)
         font.setWeight(75)
@@ -45,7 +45,7 @@ class Ui_NotaryWindow(object):
 "border: 1px solid #000000")
         self.exitBtn.setObjectName("exitBtn")
         self.clientListBtn = QtWidgets.QPushButton(self.centralwidget)
-        self.clientListBtn.setGeometry(QtCore.QRect(130, 160, 281, 41))
+        self.clientListBtn.setGeometry(QtCore.QRect(110, 160, 281, 41))
         font = QtGui.QFont()
         font.setBold(True)
         font.setWeight(75)
@@ -55,15 +55,15 @@ class Ui_NotaryWindow(object):
 "background-color: rgb(255, 192, 66);\n"
 "border: 1px solid #000000")
         self.clientListBtn.setObjectName("clientListBtn")
-        self.label_2 = QtWidgets.QLabel(self.centralwidget)
-        self.label_2.setGeometry(QtCore.QRect(80, 50, 381, 31))
+        self.welcome = QtWidgets.QLabel(self.centralwidget)
+        self.welcome.setGeometry(QtCore.QRect(70, 50, 381, 31))
         font = QtGui.QFont()
         font.setPointSize(12)
-        self.label_2.setFont(font)
-        self.label_2.setStyleSheet("color: rgb(38, 18, 148);")
-        self.label_2.setObjectName("label_2")
+        self.welcome.setFont(font)
+        self.welcome.setStyleSheet("color: rgb(38, 18, 148);")
+        self.welcome.setObjectName("welcome")
         self.label_3 = QtWidgets.QLabel(self.centralwidget)
-        self.label_3.setGeometry(QtCore.QRect(190, 110, 161, 31))
+        self.label_3.setGeometry(QtCore.QRect(170, 110, 161, 31))
         font = QtGui.QFont()
         font.setPointSize(9)
         font.setBold(True)
@@ -71,16 +71,28 @@ class Ui_NotaryWindow(object):
         self.label_3.setFont(font)
         self.label_3.setStyleSheet("color: rgb(38, 18, 148);")
         self.label_3.setObjectName("label_3")
-        MainWindow.setCentralWidget(self.centralwidget)
+        self.toProfileBtn = QtWidgets.QPushButton(self.centralwidget)
+        self.toProfileBtn.setGeometry(QtCore.QRect(110, 280, 281, 41))
+        font = QtGui.QFont()
+        font.setBold(True)
+        font.setWeight(75)
+        self.toProfileBtn.setFont(font)
+        self.toProfileBtn.setStyleSheet("border-color: rgb(255, 249, 62);\n"
+"border-radius: 20px;\n"
+"background-color: rgb(255, 192, 66);\n"
+"border: 1px solid #000000")
+        self.toProfileBtn.setObjectName("toProfileBtn")
+        NotaryWindow.setCentralWidget(self.centralwidget)
 
-        self.retranslateUi(MainWindow)
-        QtCore.QMetaObject.connectSlotsByName(MainWindow)
+        self.retranslateUi(NotaryWindow)
+        QtCore.QMetaObject.connectSlotsByName(NotaryWindow)
 
-    def retranslateUi(self, MainWindow):
+    def retranslateUi(self, NotaryWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.editDealBtn.setText(_translate("MainWindow", "РЕДАКТИРОВАТЬ УСЛУГИ"))
-        self.exitBtn.setText(_translate("MainWindow", "ВЫХОД"))
-        self.clientListBtn.setText(_translate("MainWindow", "ПРОСМОТРЕТЬ СПИСОК КЛИЕНТОВ"))
-        self.label_2.setText(_translate("MainWindow", "Добро пожаловать в систему, username!"))
-        self.label_3.setText(_translate("MainWindow", "Выберите действие"))
+        NotaryWindow.setWindowTitle(_translate("NotaryWindow", "MainWindow"))
+        self.editDealBtn.setText(_translate("NotaryWindow", "РЕДАКТИРОВАТЬ УСЛУГИ"))
+        self.exitBtn.setText(_translate("NotaryWindow", "ВЫХОД"))
+        self.clientListBtn.setText(_translate("NotaryWindow", "ПРОСМОТРЕТЬ СПИСОК КЛИЕНТОВ"))
+        self.welcome.setText(_translate("NotaryWindow", "Добро пожаловать в систему, username!"))
+        self.label_3.setText(_translate("NotaryWindow", "Выберите действие"))
+        self.toProfileBtn.setText(_translate("NotaryWindow", "ПРОФИЛЬ"))

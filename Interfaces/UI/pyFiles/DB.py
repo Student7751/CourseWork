@@ -38,12 +38,12 @@ class DB:
         # Commit changes
         # db.commit()
 
-    # Returning tuple(ID, NAME, SURNAME, Patronymic, Phone_Number, Login, Password) of user if it's exists
+    # Returning tuple(ID, SURNAME, NAME, Patronymic, Phone_Number, Login, Password) of user if it's exists
     @classmethod
     def getUser(cls, table, login, password):
         # Creating query to get client data
         query = f"""
-            SELECT {table}.ID, {table}.NAME, {table}.SURNAME, {table}.PATRONYMIC, {table}.PHONE_NUMBER, LOGIN, PASSWORD
+            SELECT {table}.ID, {table}.SURNAME, {table}.NAME, {table}.PATRONYMIC, {table}.PHONE_NUMBER, LOGIN, PASSWORD
             FROM {table} JOIN ENTRYDATA
             ON {table}.ID = ENTRYDATA.ID
             WHERE ENTRYDATA.LOGIN = ? AND ENTRYDATA.PASSWORD = ?
