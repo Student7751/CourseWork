@@ -126,12 +126,12 @@ class DB:
 
     # Adding record to table
     @classmethod
-    def addUnconfRecord(cls, userID, type, descr):
+    def addUnconfRecord(cls, userID, recordID, type, descr):
         query = """
-                INSERT INTO UnconfirmedRecords(USER_ID, TYPE, DESCRIPTION)
-                VALUES (?,?,?)
+                INSERT INTO UnconfirmedRecords(USER_ID, RECORD_ID, TYPE, DESCRIPTION)
+                VALUES (?,?,?,?)
             """
-        cls.cur.execute(query, (userID, type, descr))
+        cls.cur.execute(query, (userID, recordID, type, descr))
 
         #cls.db.commit()
     # Getting description from table by ID
@@ -143,6 +143,15 @@ class DB:
             """
         return cls.cur.execute(query, (recordID, )).fetchone()
 
+    @classmethod
+    def deleteUnconfRecord(cls, recordID):
+        query = """
+                DELETE FROM UnconfirmedRecords
+                WHERE ID = ?
+        """
+        cls.cur.execute(query, (recordID, ))
+
+        #cls.db.commit()
     # Delete user from any table in the database
     @classmethod
     def deleteUser(cls, userID, table):

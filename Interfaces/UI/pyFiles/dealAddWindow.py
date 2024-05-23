@@ -26,7 +26,7 @@ class DealAddWindow(MainWindow):
         # If all fields are filled
         if dealName and dealPrice and dealDescr:
             # Adding deal into unconfirmed table
-            DB.addUnconfRecord(self.userData[0], "Добавление заявки", ";".join([dealName, dealDescr, dealPrice]))
+            DB.addUnconfRecord(self.userData[0], -1, "Добавление услуги", ";".join([dealName, dealDescr, dealPrice]))
             # Notify that everything in order
             QMessageBox.information(self, "Уведомление", "Услуга добавлена к рассмотрению!")
             # Open main window for this window

@@ -1,7 +1,7 @@
 import sys
 
 # Importing PyQt files
-from PyQt5.QtWidgets import QApplication
+from PyQt5.QtWidgets import QApplication, QMessageBox
 # Importing based class
 from interfaces import MainWindow
 # Importing linked classes
@@ -19,6 +19,30 @@ class RecordsViewWindow(MainWindow):
         self.ui.RecordsTable.clicked.connect(self.getDescr)
         self.ui.applyBtn.clicked.connect(self.applyRecord)
         self.ui.backBtn.clicked.connect(self.toMainWindow)
+        self.ui.denialBtn.clicked.connect(self.deleteRecord)
+        # Checking buttons when any row was selected
+        self.ui.RecordsTable.selectionModel().selectionChanged.connect(self.checkBtns)
+
+    # Deletion record
+    def deleteRecord(self):
+        # Getting index of selected row
+        selected_row = self.ui.RecordsTable.currentRow()
+        # Getting record ID
+        recordID = self.ui.RecordsTable.item(selected_row, 0).text()
+        # Delete record from unconfirmed table
+        DB.deleteUnconfRecord(recordID)
+        # Update table
+        TableModel.fillTable(self.ui.RecordsTable, "UnconfirmedRecords")
+
+    # Checking buttons and setting its enabled of disabled
+    def checkBtns(self):
+        # Getting selected row
+        selected_rows = self.ui.RecordsTable.selectionModel().selectedRows()
+        # Setting buttons visible
+        self.ui.applyBtn.setEnabled(bool(selected_rows))
+        self.ui.denialBtn.setEnabled(bool(selected_rows))
+        # Setting empty text in description
+        self.ui.recordDescr.setText("")
 
     # Opening main window for this window
     def toMainWindow(self):
@@ -27,10 +51,29 @@ class RecordsViewWindow(MainWindow):
 
     # Adding new record to table
     def applyRecord(self):
-        # Getting data
-        name, description, price = self.ui.recordDescr.toPlainText().split(";")
-        # Adding new record with data
-        DB.addOffer(name, description, price)
+        # Getting index of selected row
+        selected_row = self.ui.RecordsTable.currentRow()
+        # Getting type and ID of record
+        recType = self.ui.RecordsTable.item(selected_row, 3).text()
+        recID = self.ui.RecordsTable.item(selected_row, 2).text()
+
+        # Do something depending on the type of record
+        if recType == "Добавление услуги":
+            # Getting data
+            name, description, price = self.ui.recordDescr.toPlainText().split(";")
+            # Adding new record with data
+            DB.addOffer(name, description, price)
+
+            QMessageBox.information(self, "Уведомление", "Заявка успешно добавлена!")
+            # Deletion record from table
+            self.deleteRecord()
+        elif recType == "Удаление услуги":
+            # Delete offer from table
+            DB.deleteUser(recID, "OFFERS")
+
+            QMessageBox.information(self, "Уведомление", "Услуга успешно удалена!")
+            # Deletion record from table
+            self.deleteRecord()
 
     # Getting description of the selected row
     def getDescr(self):

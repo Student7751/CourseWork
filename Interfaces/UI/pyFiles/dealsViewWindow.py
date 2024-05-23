@@ -14,9 +14,8 @@ from dealAddWindow import DealAddWindow
 class DealsViewWindow(MainWindow):
     def __init__(self, userData=()):
         super().__init__(11)
-
+        # Getting user data
         self.userData = userData
-
         # Filling table
         TableModel.fillTable(self.ui.dealsTable, "OFFERS", 1)
         # Connecting signals to slots
@@ -31,8 +30,10 @@ class DealsViewWindow(MainWindow):
 
     # Updating table when btn was clicked
     def updateTable(self):
-        if TableModel.updateTable(self.ui.dealsTable, "OFFERS") is None:
+        if TableModel.updateTable(self.ui.dealsTable, "OFFERS", self.userData[0]) is None:
             QMessageBox.information(self, "Уведомление", "Нечего обновлять")
+        else:
+            QMessageBox.information(self, "Уведомление", "Запрос на удаление отправлен!")
 
 
 if __name__ == "__main__":

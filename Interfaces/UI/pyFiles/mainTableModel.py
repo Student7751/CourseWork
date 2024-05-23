@@ -78,7 +78,7 @@ class TableModel(DB):
 
     @staticmethod
     # Deletion record from table
-    def updateTable(table, tableName):
+    def updateTable(table, tableName, userID):
         # Getting checked rows data
         res = TableModel.getCheckedItems(table)
         # If any checked row exists
@@ -86,9 +86,9 @@ class TableModel(DB):
             # Starting iteration by data list
             for i in res:
                 # Deleting user by ID
-                DB.deleteUser(i[0], tableName)
+                DB.addUnconfRecord(userID, i[0], "Удаление услуги", ";".join(i))
                 # Updating table
-                TableModel.fillTable(table, tableName, 1)
+                #TableModel.fillTable(table, tableName, 1)
             # Returning value to exit the function
             return 0
         return None
