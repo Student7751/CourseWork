@@ -16,10 +16,10 @@ from datetime import date
 
 
 class MakeDealWindow(MainWindow):
-    def __init__(self, data=[]):
+    def __init__(self, data=()):
         super().__init__(8)
         # Getting main user data
-        self.userID, self.userName, self.userSurname = data
+        self.data = data
         # Filling table with checkboxes (third parameter = 1)
         TableModel.fillTable(self.ui.NotariesTable, "OFFERS", 1)
         # Getting list of notaries data
@@ -33,7 +33,7 @@ class MakeDealWindow(MainWindow):
     # Opening the main window for this window
     def toMainWindow(self):
         from ClientWindow import ClientWindow
-        self.openWindow(ClientWindow((self.userID, self.userName, self.userSurname)))
+        self.openWindow(ClientWindow(self.data))
 
     # Getting notary ID by the data from combobox
     def getNotaryID(self, data):
@@ -60,7 +60,7 @@ class MakeDealWindow(MainWindow):
                  "Комиссионные": '7,2 %',
                  "Скидка": 0,
                  "Сумма сделки": [],
-                 "UserID": self.userID,
+                 "UserID": self.data[0],
                  "NotaryID": self.getNotaryID(self.ui.notariesBox.currentText())
                  }
 
@@ -76,7 +76,7 @@ class MakeDealWindow(MainWindow):
             p = sum(p) - (sum(p) * (d["Скидка"] / 100))
             d["Сумма сделки"] = p + (p * 0.07)
             # Opening other window
-            self.openWindow(ConfirmDealWindow(d, [self.userID, self.userName, self.userSurname]))
+            self.openWindow(ConfirmDealWindow(d, self.data))
             return 0
 
         QMessageBox.warning(self, "Уведомление", "Выберите хотя бы одну сделку!")

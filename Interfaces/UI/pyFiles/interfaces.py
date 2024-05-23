@@ -16,6 +16,7 @@ from DealAddWindow_UI import Ui_DealAddWindow
 from DealsViewWindow_UI import Ui_DealViewWindow
 from ClientViewWindow_UI import Ui_ClientViewWindow
 from NotaryClientViewWindow_UI import Ui_NotaryClientViewWindow
+from ProfileWindow_UI import Ui_ProfileWindow
 
 
 # Based class for all interfaces
@@ -23,7 +24,7 @@ class MainWindow(QMainWindow):
     """Base class for all windows in the program"""
     __interfaces = (Ui_AuthWindow, Ui_AdminWindow, Ui_NotariesViewWindow, Ui_NotaryAddWindow, Ui_RegistrWindow,
                     Ui_ClientWindow, Ui_CompletedDealsWindow, Ui_ConfirmDealWindow, Ui_MakeDealWindow, Ui_NotaryWindow,
-                    Ui_DealAddWindow, Ui_DealViewWindow, Ui_ClientViewWindow, Ui_NotaryClientViewWindow)
+                    Ui_DealAddWindow, Ui_DealViewWindow, Ui_ClientViewWindow, Ui_NotaryClientViewWindow, Ui_ProfileWindow)
 
     def __init__(self, interfaceIndex):
         super().__init__()

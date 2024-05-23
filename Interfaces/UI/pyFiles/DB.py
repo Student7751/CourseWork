@@ -25,12 +25,25 @@ class DB:
         # Executing query
         return cls.cur.execute(query).fetchone() is not None
 
-    # Returning tuple(ID, NAME, SURNAME) of user if it's exists
+    # Updating the table when a user edits a profile (not work with Admin and Offers tables)
+    @classmethod
+    def updateTable(cls, table, ID, name, surname, patronymic, phone_number, login, password):
+        # Updating data in user table
+        updateTable = f"UPDATE {table} SET NAME=?, SURNAME=?, PATRONYMIC=?, PHONE_NUMBER=? WHERE ID=?"
+        # Updating data in private table
+        updateEntryData = f"UPDATE ENTRYDATA SET LOGIN=?, PASSWORD=? WHERE ID=?"
+        # Executing queries
+        cls.cur.execute(updateTable, (name, surname, patronymic, phone_number, ID))
+        cls.cur.execute(updateEntryData, (login, password, ID))
+        # Commit changes
+        # db.commit()
+
+    # Returning tuple(ID, NAME, SURNAME, Patronymic, Phone_Number, Login, Password) of user if it's exists
     @classmethod
     def getUser(cls, table, login, password):
         # Creating query to get client data
         query = f"""
-            SELECT {table}.ID, {table}.NAME, {table}.SURNAME
+            SELECT {table}.ID, {table}.NAME, {table}.SURNAME, {table}.PATRONYMIC, {table}.PHONE_NUMBER, LOGIN, PASSWORD
             FROM {table} JOIN ENTRYDATA
             ON {table}.ID = ENTRYDATA.ID
             WHERE ENTRYDATA.LOGIN = ? AND ENTRYDATA.PASSWORD = ?
