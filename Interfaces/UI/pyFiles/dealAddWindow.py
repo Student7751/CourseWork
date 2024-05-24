@@ -7,6 +7,7 @@ from PyQt5.QtWidgets import QApplication, QMessageBox
 from interfaces import MainWindow
 from DB import DB
 
+
 class DealAddWindow(MainWindow):
     def __init__(self, userData=()):
         super().__init__(10)
@@ -26,7 +27,8 @@ class DealAddWindow(MainWindow):
         # If all fields are filled
         if dealName and dealPrice and dealDescr:
             # Adding deal into unconfirmed table
-            DB.addUnconfRecord(self.userData[0], -1, "Добавление услуги", ";".join([dealName, dealDescr, dealPrice]))
+            DB.addUnconfRecord(userID=self.userData[0], recordID=-1, type="Добавление услуги",
+                               descr=";".join([dealName, dealDescr, dealPrice]))
             # Notify that everything in order
             QMessageBox.information(self, "Уведомление", "Услуга добавлена к рассмотрению!")
             # Open main window for this window
@@ -34,11 +36,11 @@ class DealAddWindow(MainWindow):
         else:
             QMessageBox.information(self, "Уведомление", "Заполните все поля!")
 
-
     # Opening main window for this window
     def toMainWindow(self):
         from dealsViewWindow import DealsViewWindow
         self.openWindow(DealsViewWindow(self.userData))
+
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)

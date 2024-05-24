@@ -31,8 +31,6 @@ class Ui_ProfileWindow(object):
         self.label_2.setStyleSheet("color: rgb(38, 18, 148);")
         self.label_2.setObjectName("label_2")
         self.numberEdit = QtWidgets.QLineEdit(self.centralwidget)
-        self.numberEdit.setValidator(QtGui.QIntValidator())
-        self.numberEdit.setMaxLength(11)
         self.numberEdit.setGeometry(QtCore.QRect(50, 160, 281, 22))
         self.numberEdit.setStyleSheet("border-radius: 10px\n"
 "")
@@ -88,9 +86,6 @@ class Ui_ProfileWindow(object):
         self.passLine.setText("")
         self.passLine.setObjectName("passLine")
         self.initialsEdit = QtWidgets.QLineEdit(self.centralwidget)
-        rx = QtCore.QRegExp("^[а-яА-Я]+( [а-яА-Я]+){0,2}$")
-        val = QtGui.QRegExpValidator(rx)
-        self.initialsEdit.setValidator(val)
         self.initialsEdit.setGeometry(QtCore.QRect(50, 90, 281, 22))
         self.initialsEdit.setStyleSheet("border-radius: 10px\n"
 "")
