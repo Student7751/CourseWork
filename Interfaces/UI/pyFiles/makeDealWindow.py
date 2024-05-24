@@ -21,7 +21,7 @@ class MakeDealWindow(MainWindow):
         # Getting main user data
         self.data = data
         # Filling table with checkboxes (third parameter = 1)
-        TableModel.fillTable(self.ui.NotariesTable, "OFFERS", 1)
+        TableModel.fillTable(table_widget=self.ui.NotariesTable, table="OFFERS", withCheckboxes=True)
         # Getting list of notaries data
         self.res = DB.getNotariesNames()
         # Adding all notaries into combobox ([1:] uses to miss the ID)
@@ -37,49 +37,45 @@ class MakeDealWindow(MainWindow):
 
     # Getting notary ID by the data from combobox
     def getNotaryID(self, data):
-        # Spliting data for get initials
-        for i in data.split():
-            # If any initial in the notaries list returning it
-            for j in self.res:
-                if i in j:
-                    return j[0]
+        for notary in self.res:
+            if any(part in notary for part in data.split()):
+                return notary[0]
         # Else returning None
         return None
+
+    def createDealInfo(self, checked_items):
+        dealInfo = {
+            "Дата": str(date.today()),
+            "Название услуг/(-и)": [item[1] for item in checked_items],
+            "Описание услуг/(-и)": [item[2] for item in checked_items],
+            "Нотариус": self.ui.notariesBox.currentText(),
+            "Комиссионные": '7,2 %',
+            "Скидка": 0,
+            "Сумма сделки": [],
+            "UserID": self.data[0],
+            "NotaryID": self.getNotaryID(self.ui.notariesBox.currentText())
+        }
+
+        sums = [int(item[3]) for item in checked_items]
+        discount = len(sums) * 4
+        totalSum = sum(sums) * (1 - discount / 100) * 1.072
+        dealInfo["Скидка"] = discount
+        dealInfo["Сумма сделки"] = totalSum
+
+        return dealInfo
 
     # Filling the dict and opening the window
     def toConfirmClicked(self):
         # Getting list of checked rows
-        rt = TableModel.getCheckedItems(self.ui.NotariesTable)
+        checkedItems = TableModel.getCheckedItems(table=self.ui.NotariesTable)
         # If any row checked
-        if rt:
-            # Creating dict with the default parameters
-            d = {"Дата": str(date.today()),
-                 "Название услуг/(-и)": [],
-                 "Описание услуг/(-и)": [],
-                 "Нотариус": self.ui.notariesBox.currentText(),
-                 "Комиссионные": '7,2 %',
-                 "Скидка": 0,
-                 "Сумма сделки": [],
-                 "UserID": self.data[0],
-                 "NotaryID": self.getNotaryID(self.ui.notariesBox.currentText())
-                 }
-
-            # Filling the dict
-            for i in range(len(rt)):
-                d["Название услуг/(-и)"].append(rt[i][1])
-                d["Описание услуг/(-и)"].append(rt[i][2])
-                d["Сумма сделки"].append(int(rt[i][3]))
-
-            # Discount calculation
-            p = d["Сумма сделки"]
-            d["Скидка"] = (len(p) * 4)
-            p = sum(p) - (sum(p) * (d["Скидка"] / 100))
-            d["Сумма сделки"] = p + (p * 0.07)
+        if checkedItems:
+            dealInfo = self.createDealInfo(checkedItems)
             # Opening other window
-            self.openWindow(ConfirmDealWindow(d, self.data))
+            self.openWindow(ConfirmDealWindow(dealInfo, self.data))
             return 0
-
-        QMessageBox.warning(self, "Уведомление", "Выберите хотя бы одну сделку!")
+        else:
+            QMessageBox.warning(self, "Уведомление", "Выберите хотя бы одну сделку!")
 
 
 if __name__ == "__main__":

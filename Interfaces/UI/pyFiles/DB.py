@@ -19,11 +19,11 @@ class DB:
         query = f"""
             SELECT ID
             FROM ENTRYDATA
-            WHERE ENTRYDATA.LOGIN = "{login}"
+            WHERE ENTRYDATA.LOGIN = ?
         """
 
         # Executing query
-        return cls.cur.execute(query).fetchone() is not None
+        return cls.cur.execute(query, (login, )).fetchone() is not None
 
     # Updating the table when a user edits a profile (not work with Admin and Offers tables)
     @classmethod
@@ -66,9 +66,9 @@ class DB:
     def getNotariesNameByID(cls, ID):
         query = f"""
         SELECT Completeddeals.ID, Completeddeals.Name, Discount, Notaries.Name, Price, Date
-        FROM completeddeals join Notaries on Notaries.ID = completeddeals.Notary_ID and Client_ID = {ID}
+        FROM completeddeals join Notaries on Notaries.ID = completeddeals.Notary_ID and Client_ID = ?
         """
-        return cls.cur.execute(query).fetchall()
+        return cls.cur.execute(query, (ID, )).fetchall()
 
     # Getting notary data from table
     @classmethod
@@ -168,4 +168,3 @@ class DB:
 
         # Commit changes into main Database
         cls.db.commit()
-
