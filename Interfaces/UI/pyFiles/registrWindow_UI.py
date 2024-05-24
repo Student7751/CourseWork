@@ -12,10 +12,10 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 
 class Ui_RegistrWindow(object):
-    def setupUi(self, MainWindow):
-        MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(433, 430)
-        self.centralwidget = QtWidgets.QWidget(MainWindow)
+    def setupUi(self, RegistrWindow):
+        RegistrWindow.setObjectName("RegistrWindow")
+        RegistrWindow.resize(433, 430)
+        self.centralwidget = QtWidgets.QWidget(RegistrWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.label = QtWidgets.QLabel(self.centralwidget)
         self.label.setGeometry(QtCore.QRect(0, 0, 561, 481))
@@ -34,9 +34,6 @@ class Ui_RegistrWindow(object):
 "border: 1px solid #000000")
         self.registrBtn.setObjectName("registrBtn")
         self.initialsEdit = QtWidgets.QLineEdit(self.centralwidget)
-        rx = QtCore.QRegExp("[а-яА-Я ]{100}")
-        val = QtGui.QRegExpValidator(rx)
-        self.initialsEdit.setValidator(val)
         self.initialsEdit.setGeometry(QtCore.QRect(90, 90, 291, 31))
         self.initialsEdit.setStyleSheet("border-radius: 10px;")
         self.initialsEdit.setObjectName("initialsEdit")
@@ -47,6 +44,7 @@ class Ui_RegistrWindow(object):
         self.passEdit = QtWidgets.QLineEdit(self.centralwidget)
         self.passEdit.setGeometry(QtCore.QRect(90, 240, 291, 31))
         self.passEdit.setStyleSheet("border-radius: 10px;")
+        self.passEdit.setMaxLength(32767)
         self.passEdit.setObjectName("passEdit")
         self.label_2 = QtWidgets.QLabel(self.centralwidget)
         self.label_2.setGeometry(QtCore.QRect(50, 90, 31, 31))
@@ -87,9 +85,10 @@ class Ui_RegistrWindow(object):
         self.label_5.setStyleSheet("color: rgb(11, 29, 148);")
         self.label_5.setObjectName("label_5")
         self.numberEdit = QtWidgets.QLineEdit(self.centralwidget)
-        self.numberEdit.setValidator(QtGui.QIntValidator())
         self.numberEdit.setGeometry(QtCore.QRect(90, 190, 291, 31))
         self.numberEdit.setStyleSheet("border-radius: 10px;")
+        #self.numberEdit.setValidator(QtGui.QIntValidator())
+        #self.numberEdit.setMaxLength(120)
         self.numberEdit.setObjectName("numberEdit")
         self.label_6 = QtWidgets.QLabel(self.centralwidget)
         self.label_6.setGeometry(QtCore.QRect(50, 190, 31, 31))
@@ -117,18 +116,19 @@ class Ui_RegistrWindow(object):
         self.initialsLine.setStyleSheet("color: rgb(11, 29, 148);")
         self.initialsLine.setText("")
         self.initialsLine.setObjectName("initialsLine")
-        MainWindow.setCentralWidget(self.centralwidget)
+        RegistrWindow.setCentralWidget(self.centralwidget)
 
-        self.retranslateUi(MainWindow)
-        QtCore.QMetaObject.connectSlotsByName(MainWindow)
+        self.retranslateUi(RegistrWindow)
+        QtCore.QMetaObject.connectSlotsByName(RegistrWindow)
 
-    def retranslateUi(self, MainWindow):
+    def retranslateUi(self, RegistrWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.registrBtn.setText(_translate("MainWindow", "РЕГИСТРАЦИЯ"))
-        self.initialsEdit.setPlaceholderText(_translate("MainWindow", "Введите Ф.И.О"))
-        self.logEdit.setPlaceholderText(_translate("MainWindow", "Введите логин"))
-        self.passEdit.setPlaceholderText(_translate("MainWindow", "Введите пароль"))
-        self.cancelBtn.setText(_translate("MainWindow", "ОТМЕНА"))
-        self.label_5.setText(_translate("MainWindow", "Введите данные"))
-        self.numberEdit.setPlaceholderText(_translate("MainWindow", "Введите номер телефона"))
+        RegistrWindow.setWindowTitle(_translate("RegistrWindow", "MainWindow"))
+        self.registrBtn.setText(_translate("RegistrWindow", "РЕГИСТРАЦИЯ"))
+        self.initialsEdit.setPlaceholderText(_translate("RegistrWindow", "Введите Ф.И.О"))
+        self.logEdit.setPlaceholderText(_translate("RegistrWindow", "Введите логин"))
+        self.passEdit.setPlaceholderText(_translate("RegistrWindow", "Введите пароль"))
+        self.cancelBtn.setText(_translate("RegistrWindow", "ОТМЕНА"))
+        self.label_5.setText(_translate("RegistrWindow", "Введите данные"))
+        self.numberEdit.setPlaceholderText(_translate("RegistrWindow", "Введите номер телефона"))
+

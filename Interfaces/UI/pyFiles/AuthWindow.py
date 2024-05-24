@@ -30,21 +30,24 @@ class AuthWindow(MainWindow):
 
     # Getting a role by login postfix
     def getUserRole(self, login):
-        if login.endswith("@client.com"):
-            return "CLIENTS"
-        elif login.endswith("@notary.com"):
-            return "NOTARIES"
-        elif login.endswith("@admin.com"):
-            return "ADMINS"
-        else:
-            return None
+        # Creating a login:role dictionary
+        roles = {
+            "@client.com": "CLIENTS",
+            "@notary.com": "NOTARIES",
+            "@admin.com": "ADMINS"
+        }
+        # Iteration by dictionary and getting role by login
+        for postfix, role in roles.items():
+            if login.endswith(postfix):
+                return role
+        return None
 
     # Getting tuple((name, surname), role) if role exists
     def authenticateUser(self, login, password):
         role = self.getUserRole(login)
         if role:
             return DB.getUser(role, login, password), role
-        return None
+        return None, None
 
     # Opening window for each role
     def toRoleWindow(self):
@@ -52,11 +55,11 @@ class AuthWindow(MainWindow):
         login = self.ui.logEdit.text()
         password = self.ui.passEdit.text()
         # Getting tuple with the data
-        res = self.authenticateUser(login, password)
+        userData, role = self.authenticateUser(login, password)
         # If result is not None and tuple with data is not Empty
-        if res and res[0]:
+        if userData:
             # Open role window
-            self.openWindow(self.ROLE_WINDOWS.get(res[1])(res[0][0]))
+            self.openWindow(self.ROLE_WINDOWS[role](userData))
         else:
             QMessageBox.warning(self, "Неверные данные", "Неверный логин или пароль!")
 

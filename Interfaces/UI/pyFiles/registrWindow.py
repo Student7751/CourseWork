@@ -23,12 +23,13 @@ class RegisterWindow(MainWindow):
         self.checkingInput()
 
     # Checking any changes of fields, type needs to determine type of login
-    def checkingInput(self, type=0):
+    def checkingInput(self, userType=0):
         # Checking input data
         self.ui.passEdit.textChanged.connect(lambda: InputValidator.checkPass(self.ui.passEdit.text(), self))
-        self.ui.logEdit.textChanged.connect(lambda: InputValidator.checkLogin(self.ui.logEdit.text(), self, type))
+        self.ui.logEdit.textChanged.connect(lambda: InputValidator.checkLogin(self.ui.logEdit.text(), self, userType))
         self.ui.numberEdit.textChanged.connect(lambda: InputValidator.checkNumber(self.ui.numberEdit.text(), self))
-        self.ui.initialsEdit.textChanged.connect(lambda: InputValidator.checkInitials(self.ui.initialsEdit.text().split(), self))
+        self.ui.initialsEdit.textChanged.connect(
+            lambda: InputValidator.checkInitials(self.ui.initialsEdit.text().split(), self))
 
     # Getting data from fields, return tuple with the data
     def getDataFromFields(self):
@@ -37,13 +38,21 @@ class RegisterWindow(MainWindow):
         password = self.ui.passEdit.text()
         number = self.ui.numberEdit.text()
 
-        return *initials, number, login, password
+        # If initials are correct
+        if InputValidator.checkInitials(initials, self):
+            surname, name, patronymic = initials
+        else:
+            surname, name, patronymic = None, None, None
+
+        return surname, name, patronymic, number, login, password
 
     # Checking that all fields are correct, type need to determine the login
-    def isCorrectFields(self, name, surname, patronymic, number, login, password, type=0):
+    def isCorrectFields(self, name, surname, patronymic, number, login, password, userType=0):
         return all([InputValidator.checkInitials([name, surname, patronymic], self),
-                    InputValidator.checkLogin(login, self, type),
-                    InputValidator.checkPass(password, self), InputValidator.checkNumber(number, self)])
+                    InputValidator.checkLogin(login, self, userType),
+                    InputValidator.checkPass(password, self),
+                    InputValidator.checkNumber(number, self)
+                    ])
 
     # Checking input values and adding user to DB
     def addUser(self):
@@ -52,11 +61,10 @@ class RegisterWindow(MainWindow):
 
         # Checking input data to correct with all parameters
         if self.isCorrectFields(surname, name, patronymic, number, login, password) and not DB.isLoginExists(login):
+            # Getting type of user
+            userType = "clients" if login.endswith("@client.com") else "notaries"
             # Using DB class method to add new user into DataBase
-            if login.endswith("@client.com"):
-                DB.addUser("clients", surname, name, patronymic, number, login, password)
-            else:
-                DB.addUser("notaries", surname, name, patronymic, number, login, password)
+            DB.addUser(userType, surname, name, patronymic, number, login, password)
 
             QMessageBox.information(self, "Успех", "Пользователь успешно добавлен!")
             return 0
