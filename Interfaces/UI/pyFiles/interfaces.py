@@ -19,6 +19,7 @@ from NotaryClientViewWindow_UI import Ui_NotaryClientViewWindow
 from ProfileWindow_UI import Ui_ProfileWindow
 from RecordsViewWindow_UI import Ui_RecordsViewWindow
 
+from inputValidator import InputValidator
 
 # Based class for all interfaces
 class MainWindow(QMainWindow):
@@ -34,6 +35,28 @@ class MainWindow(QMainWindow):
         self.ui = self.get_interface(interfaceIndex)()
         self.ui.setupUi(self)
 
+    # Checking that all fields are correct, type need to determine the login
+    def isCorrectFields(self, name, surname, patronymic, number, login, password, userType=0):
+        return all([InputValidator.checkInitials([name, surname, patronymic], self),
+                    InputValidator.checkLogin(login, self, userType),
+                    InputValidator.checkPass(password, self),
+                    InputValidator.checkNumber(number, self)
+                    ])
+
+    # Getting data from fields, return tuple with the data
+    def getDataFromFields(self):
+        initials = self.ui.initialsEdit.text().split()
+        login = self.ui.logEdit.text()
+        password = self.ui.passEdit.text()
+        number = self.ui.numberEdit.text()
+
+        # If initials are correct
+        if InputValidator.checkInitials(initials, self):
+            surname, name, patronymic = initials
+        else:
+            surname, name, patronymic = None, None, None
+
+        return surname, name, patronymic, number, login, password
     # Opening any window in the program
     def openWindow(self, window):
         self.close()
@@ -47,6 +70,7 @@ class MainWindow(QMainWindow):
     @classmethod
     def get_interface(cls, indx):
         return cls.__interfaces[indx]
+
 
     # Opening the Authorization window when the exit button is clicked
     def exit_btn(self):

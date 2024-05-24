@@ -17,17 +17,17 @@ class ClientsViewWindow(MainWindow):
         self.ui.updateBtn.clicked.connect(self.updateTable)
 
         # Filling the table
-        TableModel.fillTable(self.ui.clientsTable, "clients", 1)
+        TableModel.fillTable(table_widget=self.ui.clientsTable, table="clients", withCheckboxes=True)
 
     # Updating table by use TableModel function
     def updateTable(self):
-        if TableModel.updateTable(self.ui.clientsTable, "clients") is None:
+        if not TableModel.updateTable(table=self.ui.clientsTable, tableName="clients", isAdmin=True):
             QMessageBox.information(self, "Уведомление", "Нечего обновлять")
 
     # Opening main window for this window
     def toMainWindow(self):
         from AdminWindow import AdminWindow
-        self.openWindow(AdminWindow("name"))
+        self.openWindow(AdminWindow())
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)

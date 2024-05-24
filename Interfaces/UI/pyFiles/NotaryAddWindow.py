@@ -13,9 +13,10 @@ class NotaryAddWindow(MainWindow):
 
         # Connecting buttons with its functions
         self.ui.cancelBtn.clicked.connect(self.toMainWindow)
-        self.ui.addNotaryBtn.clicked.connect(lambda: RegisterWindow.addUser(self, 1))
+        self.ui.addNotaryBtn.clicked.connect(lambda: RegisterWindow.addUser(self, ut=1))
         # Checking data by use method from other class
-        RegisterWindow.checkingInput(self, 1)
+        RegisterWindow.checkingInput(self, userType=1)
+
 
     # Opening main window for this window
     def toMainWindow(self):

@@ -26,38 +26,34 @@ class TableModel(DB):
 
     # Filling any table
     @staticmethod
-    def fillTable(table_widget, table, a=0, b=0):
-        # b - is a ID of client and needs to determine what type of table we gets
-        if b:
-            data = DB.getNotariesNameByID(b)
-        else:
-            # Getting tuple with the data by table name
-            data = DB.getUsers(table)
+    def fillTable(table_widget, table, withCheckboxes=False, clientID=0):
+        # Getting data determine by type of client
+        data = DB.getNotariesNameByID(clientID) if clientID else DB.getUsers(table)
         # Getting row count and column count
         table_widget.setRowCount(len(data))
         column_count = table_widget.columnCount()
         # Filling the table
         for row_index, row_data in enumerate(data):
-            # a - is a flag, need to determine type of table (0 - if table not support checkboxes, 1 - if table support)
-            if a:
+            # withCheckboxes - is a flag, need to determine type of table (0 - if table not support checkboxes, 1 - if table support)
+            if withCheckboxes:
                 # Creating checkbox to table
                 cb = TableModel.createCheckboxForTable()
                 # Set checkbox object into row
                 table_widget.setCellWidget(row_index, 0, cb)
                 
             # Inserting data to each row
-            for column_index in range(column_count - a):
+            for column_index in range(column_count - int(withCheckboxes)):
                 # Creating data item
                 item = QTableWidgetItem(str(row_data[column_index]))
                 item.setTextAlignment(QtCore.Qt.AlignVCenter | QtCore.Qt.AlignHCenter)
                 # insert item to table
-                table_widget.setItem(row_index, column_index + a, item)
+                table_widget.setItem(row_index, column_index + int(withCheckboxes), item)
 
     # Getting data of the checked rows
     @staticmethod
     def getCheckedItems(table):
         # Creating list with the results
-        data = list()
+        checkedItems = list()
 
         for row in range(table.rowCount()):
             # Getting widget from the first column
@@ -66,29 +62,27 @@ class TableModel(DB):
             cb = item.layout().itemAt(0).widget()
             if cb.isChecked():
                 # Creating temp list with row data
-                lst = list()
-                # Starting iteration by columns (-1 and +1 needs to skip checkbox object)
-                for column in range(table.columnCount() - 1):
-                    # Appending data to the temp list
-                    lst.append(table.item(row, column + 1).text())
-                # Appending temp list to the result list
-                data.append(lst)
+                row_data = [table.item(row, col).text() for col in range(1, table.columnCount())]
+                checkedItems.append(row_data)
         # Returning result list
-        return data
+        return checkedItems
 
     @staticmethod
     # Deletion record from table
-    def updateTable(table, tableName, userID):
+    def updateTable(table, tableName, userID=0, isAdmin=False):
         # Getting checked rows data
         res = TableModel.getCheckedItems(table)
         # If any checked row exists
         if res:
             # Starting iteration by data list
             for i in res:
-                # Deleting user by ID
-                DB.addUnconfRecord(userID, i[0], "Удаление услуги", ";".join(i))
-                # Updating table
-                #TableModel.fillTable(table, tableName, 1)
+                if isAdmin:
+                    # Deleting user by ID
+                    DB.deleteUser(i[0], tableName)
+                else:
+                    # Inserting record to unconfirmed table
+                    DB.addUnconfRecord(userID, i[0], "Удаление услуги", ";".join(i))
+            TableModel.fillTable(table, tableName, withCheckboxes=True)
             # Returning value to exit the function
-            return 0
-        return None
+            return True
+        return False

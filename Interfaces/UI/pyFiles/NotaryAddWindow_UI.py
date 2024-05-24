@@ -52,7 +52,6 @@ class Ui_NotaryAddWindow(object):
         self.initialsEdit.setStyleSheet("border-radius: 10px;")
         self.initialsEdit.setObjectName("initialsEdit")
         self.numberEdit = QtWidgets.QLineEdit(self.centralwidget)
-        self.numberEdit.setValidator(QtGui.QIntValidator())
         self.numberEdit.setGeometry(QtCore.QRect(100, 140, 311, 31))
         self.numberEdit.setStyleSheet("border-radius: 10px;")
         self.numberEdit.setObjectName("numberEdit")

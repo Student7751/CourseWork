@@ -14,7 +14,7 @@ class RecordsViewWindow(MainWindow):
         super().__init__(15)
 
         # Filling the table
-        TableModel.fillTable(self.ui.RecordsTable, "UnconfirmedRecords")
+        TableModel.fillTable(table_widget=self.ui.RecordsTable, table="UnconfirmedRecords")
         # Connecting signals to slots
         self.ui.RecordsTable.clicked.connect(self.getDescr)
         self.ui.applyBtn.clicked.connect(self.applyRecord)
@@ -32,17 +32,20 @@ class RecordsViewWindow(MainWindow):
         # Delete record from unconfirmed table
         DB.deleteUnconfRecord(recordID)
         # Update table
-        TableModel.fillTable(self.ui.RecordsTable, "UnconfirmedRecords")
+        TableModel.fillTable(table_widget=self.ui.RecordsTable, table="UnconfirmedRecords")
+        # Clear description edit
+        self.ui.recordDescr.clear()
 
     # Checking buttons and setting its enabled of disabled
     def checkBtns(self):
         # Getting selected row
         selected_rows = self.ui.RecordsTable.selectionModel().selectedRows()
+        buttons_enabled = bool(selected_rows)
         # Setting buttons visible
-        self.ui.applyBtn.setEnabled(bool(selected_rows))
-        self.ui.denialBtn.setEnabled(bool(selected_rows))
+        self.ui.applyBtn.setEnabled(buttons_enabled)
+        self.ui.denialBtn.setEnabled(buttons_enabled)
         # Setting empty text in description
-        self.ui.recordDescr.setText("")
+        self.ui.recordDescr.clear()
 
     # Opening main window for this window
     def toMainWindow(self):
@@ -62,27 +65,24 @@ class RecordsViewWindow(MainWindow):
             # Getting data
             name, description, price = self.ui.recordDescr.toPlainText().split(";")
             # Adding new record with data
-            DB.addOffer(name, description, price)
+            DB.addOffer(name=name, descr=description, price=price)
 
             QMessageBox.information(self, "Уведомление", "Заявка успешно добавлена!")
-            # Deletion record from table
-            self.deleteRecord()
         elif recType == "Удаление услуги":
             # Delete offer from table
-            DB.deleteUser(recID, "OFFERS")
+            DB.deleteUser(userID=recID, table="OFFERS")
 
             QMessageBox.information(self, "Уведомление", "Услуга успешно удалена!")
-            # Deletion record from table
-            self.deleteRecord()
+
+        # Deletion record from table
+        self.deleteRecord()
 
     # Getting description of the selected row
     def getDescr(self):
-        # Setting enabled buttons
-        self.ui.applyBtn.setEnabled(True)
         # Getting selected row
         selected_row = self.ui.RecordsTable.currentRow()
         # Getting description
-        descr = DB.getUnconfRecordDescr(self.ui.RecordsTable.item(selected_row, 0).text())
+        descr = DB.getUnconfRecordDescr(recordID=self.ui.RecordsTable.item(selected_row, 0).text())
         # Setting description to widget
         self.ui.recordDescr.setText(*descr)
 
