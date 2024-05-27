@@ -1,7 +1,7 @@
 import sys
 
 # Importing PyQt files
-from PyQt5.QtWidgets import QApplication
+from PyQt5.QtWidgets import QApplication, QMessageBox
 
 # Importing based class
 from interfaces import MainWindow
@@ -21,6 +21,22 @@ class NotaryClientsViewWindow(MainWindow):
         self.ui.backBtn.clicked.connect(self.toMainWindow)
 
         self.ui.onlyNotaryBox.stateChanged.connect(self.fillOtherClients)
+
+        self.ui.clientsTable.selectionModel().selectionChanged.connect(self.getInfoByClientID)
+
+    def getInfoByClientID(self):
+        selected_row = self.ui.clientsTable.currentRow()
+        if selected_row != -1:
+            clientID = self.ui.clientsTable.item(selected_row, 0).text()
+            res = DB.getInfoFromCompletedDeals(clientID=clientID)
+            if res:
+                deals_info = [f"Название услуг-/и: {name}\nДата сделки: {date}\nЦена сделки: {price}\n"
+                              "------------------------------------------------------------"
+                              for name, date, price in res]
+                message = f"Количество сделок с данным клиентом: {len(res)}\n" + "\n".join(deals_info)
+                QMessageBox.information(self, "Информация о сделке", message)
+            else:
+                QMessageBox.information(self, "Информация о сделке", "Это не Ваш клиент!")
 
     def fillOtherClients(self, state):
         if state:

@@ -63,6 +63,15 @@ class DB:
 
 
     @classmethod
+    def getInfoFromCompletedDeals(cls, clientID):
+        query = """
+            SELECT NAME, DATE, PRICE
+            FROM COMPLETEDDEALS
+            WHERE CLIENT_ID = ?
+        """
+
+        return cls.cur.execute(query, (clientID, )).fetchall()
+    @classmethod
     def getClientsByNotaryID(cls, notaryID):
         query = """
             SELECT * FROM CLIENTS
