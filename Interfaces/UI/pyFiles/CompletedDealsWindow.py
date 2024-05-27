@@ -6,7 +6,6 @@ from PyQt5.QtWidgets import QApplication
 # Importing based class
 from interfaces import MainWindow
 from mainTableModel import TableModel
-from DB import DB
 
 
 class CompletedDealsWindow(MainWindow):
@@ -18,6 +17,10 @@ class CompletedDealsWindow(MainWindow):
         TableModel.fillTable(self.ui.DealsTable, "completeddeals", 0, self.clientData[0])
         # Connecting signals to slots
         self.ui.BackBtn.clicked.connect(self.toMainWindow)
+        self.ui.searchEdit.textChanged.connect(self.searchData)
+
+    def searchData(self, text):
+        TableModel.search(table=self.ui.DealsTable, text=text)
 
     # Opening main window for this window
     def toMainWindow(self):

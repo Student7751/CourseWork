@@ -30,6 +30,10 @@ class MakeDealWindow(MainWindow):
         self.ui.makeDealBtn.clicked.connect(self.toConfirmClicked)
         self.ui.BackBtn.clicked.connect(self.toMainWindow)
 
+        self.ui.searchEdit.textChanged.connect(self.searchData)
+
+    def searchData(self, text):
+        TableModel.search(table=self.ui.NotariesTable, text=text)
     # Opening the main window for this window
     def toMainWindow(self):
         from ClientWindow import ClientWindow
