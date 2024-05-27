@@ -27,6 +27,7 @@ class NotaryClientsViewWindow(MainWindow):
         self.ui.clientsTable.selectionModel().selectionChanged.connect(self.getInfoByClientID)
 
         self.ui.searchEdit.textChanged.connect(self.searchData)
+        self.ui.clientsTable.setSortingEnabled(True)
 
     def searchData(self, text):
         TableModel.search(table=self.ui.clientsTable, text=text)

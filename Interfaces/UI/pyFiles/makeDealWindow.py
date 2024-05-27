@@ -32,6 +32,7 @@ class MakeDealWindow(MainWindow):
 
         self.ui.searchEdit.textChanged.connect(self.searchData)
 
+        self.ui.NotariesTable.setSortingEnabled(True)
     def searchData(self, text):
         TableModel.search(table=self.ui.NotariesTable, text=text)
     # Opening the main window for this window
@@ -49,7 +50,7 @@ class MakeDealWindow(MainWindow):
 
     def createDealInfo(self, checked_items):
         dealInfo = {
-            "Дата": str(date.today()),
+            "Дата": date.today(),
             "Название услуг/(-и)": [item[1] for item in checked_items],
             "Описание услуг/(-и)": [item[2] for item in checked_items],
             "Нотариус": self.ui.notariesBox.currentText(),

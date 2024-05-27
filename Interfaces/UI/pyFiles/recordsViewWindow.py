@@ -24,6 +24,7 @@ class RecordsViewWindow(MainWindow):
         self.ui.RecordsTable.selectionModel().selectionChanged.connect(self.checkBtns)
 
         self.ui.searchEdit.textChanged.connect(self.searchData)
+        self.ui.RecordsTable.setSortingEnabled(True)
 
     def searchData(self, text):
         TableModel.search(table=self.ui.RecordsTable, text=text)

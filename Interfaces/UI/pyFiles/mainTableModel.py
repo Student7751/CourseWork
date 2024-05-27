@@ -58,7 +58,8 @@ class TableModel(DB):
             # Inserting data to each row
             for column_index in range(column_count - int(withCheckboxes)):
                 # Creating data item
-                item = QTableWidgetItem(str(row_data[column_index]))
+                item = QTableWidgetItem()
+                item.setData(Qt.EditRole, row_data[column_index])
                 item.setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
                 # insert item to table
                 table_widget.setItem(row_index, column_index + int(withCheckboxes), item)

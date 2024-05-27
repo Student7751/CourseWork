@@ -23,6 +23,7 @@ class DealsViewWindow(MainWindow):
         self.ui.addBtn.clicked.connect(lambda: self.openWindow(DealAddWindow(self.userData)))
         self.ui.BackBtn.clicked.connect(self.toMainWindow)
         self.ui.searchEdit.textChanged.connect(self.searchData)
+        self.ui.dealsTable.setSortingEnabled(True)
 
     def searchData(self, text):
         TableModel.search(table=self.ui.dealsTable, text=text)

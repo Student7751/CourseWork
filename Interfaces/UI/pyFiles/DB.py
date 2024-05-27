@@ -85,9 +85,9 @@ class DB:
     @classmethod
     def getNotariesNameByID(cls, ID):
         query = f"""
-        SELECT Completeddeals.ID, Completeddeals.Name, Discount, Notaries.Name, Price, Date
-        FROM completeddeals join Notaries on Notaries.ID = completeddeals.Notary_ID and Client_ID = ?
-        """
+                SELECT Completeddeals.ID, Completeddeals.Name, Discount, Notaries.Name, Price, Date
+                FROM completeddeals join Notaries on Notaries.ID = completeddeals.Notary_ID and Client_ID = ?
+                """
         return cls.cur.execute(query, (ID, )).fetchall()
 
     # Getting notary data from table
@@ -142,7 +142,7 @@ class DB:
         # Executing query
         cls.cur.execute(query, (name, date, discount, price, clientID, notaryID))
         # Commit changes into main Database
-        #cls.db.commit()
+        cls.db.commit()
 
     # Adding record to table
     @classmethod

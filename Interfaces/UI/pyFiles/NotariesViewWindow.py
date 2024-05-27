@@ -22,6 +22,7 @@ class NotariesViewWindow(MainWindow):
         self.ui.addBtn.clicked.connect(lambda: self.openWindow(NotaryAddWindow()))
 
         self.ui.searchEdit.textChanged.connect(self.searchData)
+        self.ui.NotariesTable.setSortingEnabled(True)
 
     def searchData(self, text):
         TableModel.search(table=self.ui.NotariesTable, text=text)
