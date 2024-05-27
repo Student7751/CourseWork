@@ -17,11 +17,15 @@ class DealsViewWindow(MainWindow):
         # Getting user data
         self.userData = userData
         # Filling table
-        TableModel.fillTable(self.ui.dealsTable, "OFFERS", 1)
+        TableModel.fillTable(table_widget=self.ui.dealsTable, table="OFFERS", withCheckboxes=True)
         # Connecting signals to slots
         self.ui.updateBtn.clicked.connect(self.updateTable)
-        self.ui.addBtn.clicked.connect(lambda: self.openWindow(DealAddWindow(userData)))
+        self.ui.addBtn.clicked.connect(lambda: self.openWindow(DealAddWindow(self.userData)))
         self.ui.BackBtn.clicked.connect(self.toMainWindow)
+        self.ui.searchEdit.textChanged.connect(self.searchData)
+
+    def searchData(self, text):
+        TableModel.search(table=self.ui.dealsTable, text=text)
 
     # Opening main window for this window
     def toMainWindow(self):
@@ -30,10 +34,11 @@ class DealsViewWindow(MainWindow):
 
     # Updating table when btn was clicked
     def updateTable(self):
-        if TableModel.updateTable(self.ui.dealsTable, "OFFERS", self.userData[0]) is None:
+        if not TableModel.updateTable(table=self.ui.dealsTable, tableName="OFFERS", userID=self.userData[0]):
             QMessageBox.information(self, "Уведомление", "Нечего обновлять")
         else:
             QMessageBox.information(self, "Уведомление", "Запрос на удаление отправлен!")
+            TableModel.fillTable(table_widget=self.ui.dealsTable, table="OFFERS", withCheckboxes=True)
 
 
 if __name__ == "__main__":
