@@ -15,15 +15,20 @@ class NotariesViewWindow(MainWindow):
         super().__init__(2)
 
         # Filling the table by the opening window
-        TableModel.fillTable(self.ui.NotariesTable, "notaries", 1)
+        TableModel.fillTable(table_widget=self.ui.NotariesTable, withCheckboxes=True, table="notaries")
         # Connecting buttons for its slots
         self.ui.updateBtn.clicked.connect(self.updateTable)
         self.ui.backBtn.clicked.connect(self.toMainWindow)
         self.ui.addBtn.clicked.connect(lambda: self.openWindow(NotaryAddWindow()))
 
+        self.ui.searchEdit.textChanged.connect(self.searchData)
+
+    def searchData(self, text):
+        TableModel.search(table=self.ui.NotariesTable, text=text)
+
     # Updating table by user TableModel function
     def updateTable(self):
-        if TableModel.updateTable(self.ui.NotariesTable, "notaries") is None:
+        if not TableModel.updateTable(table=self.ui.NotariesTable, tableName="notaries", isAdmin=True):
             # Creating message if nothing has been checked
             QMessageBox.information(self, "Уведомление", "Нечего обновлять")
 

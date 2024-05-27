@@ -19,6 +19,11 @@ class ClientsViewWindow(MainWindow):
         # Filling the table
         TableModel.fillTable(table_widget=self.ui.clientsTable, table="clients", withCheckboxes=True)
 
+        self.ui.searchEdit.textChanged.connect(self.searchData)
+
+    def searchData(self, text):
+        TableModel.search(table=self.ui.clientsTable, text=text)
+
     # Updating table by use TableModel function
     def updateTable(self):
         if not TableModel.updateTable(table=self.ui.clientsTable, tableName="clients", isAdmin=True):

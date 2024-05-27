@@ -23,6 +23,11 @@ class RecordsViewWindow(MainWindow):
         # Checking buttons when any row was selected
         self.ui.RecordsTable.selectionModel().selectionChanged.connect(self.checkBtns)
 
+        self.ui.searchEdit.textChanged.connect(self.searchData)
+
+    def searchData(self, text):
+        TableModel.search(table=self.ui.RecordsTable, text=text)
+
     # Deletion record
     def deleteRecord(self):
         # Getting index of selected row
