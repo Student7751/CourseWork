@@ -7,6 +7,8 @@ from PyQt5.QtWidgets import QApplication
 from interfaces import MainWindow
 from mainTableModel import TableModel
 
+from DB import DB
+
 
 class NotaryClientsViewWindow(MainWindow):
     def __init__(self, userData=(1, "Name", "surname")):
@@ -17,6 +19,14 @@ class NotaryClientsViewWindow(MainWindow):
         TableModel.fillTable(table_widget=self.ui.clientsTable, table="clients")
 
         self.ui.backBtn.clicked.connect(self.toMainWindow)
+
+        self.ui.onlyNotaryBox.stateChanged.connect(self.fillOtherClients)
+
+    def fillOtherClients(self, state):
+        if state:
+            TableModel.fillClientsOfNotary(table_widget=self.ui.clientsTable, notaryID=self.userData[0])
+        else:
+            TableModel.fillTable(table_widget=self.ui.clientsTable, table="clients")
 
     # Opening main window for this window
     def toMainWindow(self):

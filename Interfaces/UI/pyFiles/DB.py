@@ -61,6 +61,17 @@ class DB:
         query = f"SELECT * FROM {table}"
         return cls.cur.execute(query).fetchall()
 
+
+    @classmethod
+    def getClientsByNotaryID(cls, notaryID):
+        query = """
+            SELECT * FROM CLIENTS
+            WHERE CLIENTS.ID IN (SELECT COMPLETEDDEALS.CLIENT_ID FROM COMPLETEDDEALS
+                                WHERE COMPLETEDDEALS.NOTARY_ID = ?)
+        """
+
+        return cls.cur.execute(query, (notaryID, )).fetchall()
+
     # Getting data to view completed deals
     @classmethod
     def getNotariesNameByID(cls, ID):

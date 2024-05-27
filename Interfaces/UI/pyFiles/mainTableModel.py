@@ -24,6 +24,19 @@ class TableModel(DB):
         # Returning widget
         return Widget
 
+    @staticmethod
+    def fillClientsOfNotary(table_widget, notaryID):
+        data = DB.getClientsByNotaryID(notaryID)
+        table_widget.setRowCount(len(data))
+        column_count = table_widget.columnCount()
+        for row_index, row_data in enumerate(data):
+            for column_index in range(column_count):
+                # Creating data item
+                item = QTableWidgetItem(str(row_data[column_index]))
+                item.setTextAlignment(QtCore.Qt.AlignVCenter | QtCore.Qt.AlignHCenter)
+                # insert item to table
+                table_widget.setItem(row_index, column_index, item)
+
     # Filling any table
     @staticmethod
     def fillTable(table_widget, table, withCheckboxes=False, clientID=0):
