@@ -36,7 +36,7 @@ class NotaryClientsViewWindow(MainWindow):
         selected_row = self.ui.clientsTable.currentRow()
         if selected_row != -1:
             clientID = self.ui.clientsTable.item(selected_row, 0).text()
-            res = DB.getInfoFromCompletedDeals(clientID=clientID)
+            res = DB.getInfoFromCompletedDeals(clientID=clientID, notaryID=self.userData[0])
             if res:
                 deals_info = [f"Название услуг-/и: {name}\nДата сделки: {date}\nЦена сделки: {price}\n"
                               "------------------------------------------------------------"
@@ -49,8 +49,10 @@ class NotaryClientsViewWindow(MainWindow):
     def fillOtherClients(self, state):
         if state:
             TableModel.fillClientsOfNotary(table_widget=self.ui.clientsTable, notaryID=self.userData[0])
+            self.ui.clientsTable.setSortingEnabled(False)
         else:
             TableModel.fillTable(table_widget=self.ui.clientsTable, table="clients")
+            self.ui.clientsTable.setSortingEnabled(True)
 
     # Opening main window for this window
     def toMainWindow(self):

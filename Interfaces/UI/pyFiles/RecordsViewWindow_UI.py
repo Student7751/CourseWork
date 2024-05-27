@@ -24,6 +24,7 @@ class Ui_RecordsViewWindow(object):
         self.label.setText("")
         self.label.setObjectName("label")
         self.RecordsTable = QtWidgets.QTableWidget(self.centralwidget)
+        self.RecordsTable.setSelectionBehavior(QtWidgets.QTableWidget.SelectRows)
         self.RecordsTable.setEnabled(True)
         self.RecordsTable.setGeometry(QtCore.QRect(30, 90, 431, 441))
         font = QtGui.QFont()

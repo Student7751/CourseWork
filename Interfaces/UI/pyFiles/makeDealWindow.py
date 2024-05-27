@@ -43,7 +43,8 @@ class MakeDealWindow(MainWindow):
     # Getting notary ID by the data from combobox
     def getNotaryID(self, data):
         for notary in self.res:
-            if any(part in notary for part in data.split()):
+            if all(part in notary for part in data.split()):
+                print(notary)
                 return notary[0]
         # Else returning None
         return None
@@ -76,6 +77,8 @@ class MakeDealWindow(MainWindow):
         # If any row checked
         if checkedItems:
             dealInfo = self.createDealInfo(checkedItems)
+            print(dealInfo)
+            print(self.data)
             # Opening other window
             self.openWindow(ConfirmDealWindow(dealInfo, self.data))
             return 0
