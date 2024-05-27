@@ -2,6 +2,8 @@ import sys
 
 # Importing PyQt files
 from PyQt5.QtWidgets import QApplication, QMessageBox
+from PyQt5.QtGui import QBrush, QColor
+from PyQt5.QtCore import Qt
 
 # Importing based class
 from interfaces import MainWindow
@@ -23,6 +25,11 @@ class NotaryClientsViewWindow(MainWindow):
         self.ui.onlyNotaryBox.stateChanged.connect(self.fillOtherClients)
 
         self.ui.clientsTable.selectionModel().selectionChanged.connect(self.getInfoByClientID)
+
+        self.ui.searchEdit.textChanged.connect(self.searchData)
+
+    def searchData(self, text):
+        TableModel.search(table=self.ui.clientsTable, text=text)
 
     def getInfoByClientID(self):
         selected_row = self.ui.clientsTable.currentRow()

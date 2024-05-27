@@ -2,7 +2,8 @@
 from DB import DB
 # Importing PyQt5 widget
 from PyQt5.QtWidgets import QTableWidgetItem, QCheckBox, QHBoxLayout, QWidget
-from PyQt5 import QtCore
+from PyQt5.QtCore import Qt
+
 
 class TableModel(DB):
     """Base class for all QTableWidget object in program. Include functions to fill, load, delete tables"""
@@ -18,7 +19,7 @@ class TableModel(DB):
         Layout = QHBoxLayout(Widget)
         # Adding our checkbox and align it
         Layout.addWidget(CheckBox)
-        Layout.setAlignment(QtCore.Qt.AlignCenter)
+        Layout.setAlignment(Qt.AlignCenter)
         Layout.setContentsMargins(0, 0, 0, 0)
         Widget.setLayout(Layout)
         # Returning widget
@@ -33,7 +34,7 @@ class TableModel(DB):
             for column_index in range(column_count):
                 # Creating data item
                 item = QTableWidgetItem(str(row_data[column_index]))
-                item.setTextAlignment(QtCore.Qt.AlignVCenter | QtCore.Qt.AlignHCenter)
+                item.setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
                 # insert item to table
                 table_widget.setItem(row_index, column_index, item)
 
@@ -53,14 +54,29 @@ class TableModel(DB):
                 cb = TableModel.createCheckboxForTable()
                 # Set checkbox object into row
                 table_widget.setCellWidget(row_index, 0, cb)
-                
+
             # Inserting data to each row
             for column_index in range(column_count - int(withCheckboxes)):
                 # Creating data item
                 item = QTableWidgetItem(str(row_data[column_index]))
-                item.setTextAlignment(QtCore.Qt.AlignVCenter | QtCore.Qt.AlignHCenter)
+                item.setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
                 # insert item to table
                 table_widget.setItem(row_index, column_index + int(withCheckboxes), item)
+
+    # Searching data in table
+    @staticmethod
+    def search(table, text):
+        # Clear current selection
+        table.setCurrentItem(None)
+
+        if not text:
+            # Empty string, don't search.
+            return
+
+        matchingItems = table.findItems(text, Qt.MatchContains)
+        if matchingItems:
+            for item in matchingItems:
+                item.setSelected(True)
 
     # Getting data of the checked rows
     @staticmethod
