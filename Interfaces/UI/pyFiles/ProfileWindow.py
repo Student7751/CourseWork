@@ -30,7 +30,6 @@ class ProfileWindow(MainWindow):
     # Changing widgets and setting user data to fields
     def changeWidgets(self, userData):
         # Getting user data ([1:] needs to ignore ID)
-        print(userData)
         userSurname, userName, userPatronymic, userPhone_number, userLogin, userPassword, userType = userData[1:]
         self.ui.initialsEdit.setText(f"{userSurname} {userName} {userPatronymic}")
         self.ui.numberEdit.setText(userPhone_number)
@@ -50,9 +49,15 @@ class ProfileWindow(MainWindow):
     def applyChanges(self):
         # Getting user data
         newData = RegisterWindow.getDataFromFields(self)
+        print(self.userData)
+        print(newData)
         # If nothing changes
         if set(newData) <= set(self.userData):
             QMessageBox.warning(self, "Ошибка", "Измените хотя бы одно поле!")
+            return 0
+
+        if newData[4] != self.userData[5] and DB.isLoginExists(newData[4]):
+            QMessageBox.warning(self, "Ошибка", "Такой логин уже существует!")
             return 0
 
         # If all fields are correct

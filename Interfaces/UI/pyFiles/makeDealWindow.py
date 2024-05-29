@@ -32,7 +32,16 @@ class MakeDealWindow(MainWindow):
 
         self.ui.searchEdit.textChanged.connect(self.searchData)
 
+        self.ui.NotariesTable.selectionModel().selectionChanged.connect(self.displayDescr)
+
         self.ui.NotariesTable.setSortingEnabled(True)
+
+    def displayDescr(self):
+        selected_row = self.ui.NotariesTable.currentRow()
+        descr = self.ui.NotariesTable.item(selected_row, 3).text()
+        self.ui.descrEdit.setText(descr)
+
+
     def searchData(self, text):
         TableModel.search(table=self.ui.NotariesTable, text=text)
     # Opening the main window for this window

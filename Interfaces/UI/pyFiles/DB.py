@@ -3,9 +3,9 @@ import sqlite3
 
 
 class DB:
-    """Class containing methods for working with the database.
-    The database including 4 tables: Clients, Notaries, Admins and "private" table - ENTRYDATA.
-    The ENTRYDATA table including private parameters for all users such as login and password."""
+    """Class containing methods for working with the database. The database including 7 tables: Clients, Notaries,
+    Admins, CompletedDeals, UnconfirmedRecords, Offers and "private" table - ENTRYDATA. The ENTRYDATA table including
+    private parameters for all users such as login and password."""
 
     # Connecting the main DataBase (Creating new one if it does not exist)
     db = sqlite3.connect('ProgramDB.db')
@@ -36,7 +36,7 @@ class DB:
         cls.cur.execute(updateTable, (name, surname, patronymic, phone_number, ID))
         cls.cur.execute(updateEntryData, (login, password, ID))
         # Commit changes
-        # db.commit()
+        cls.db.commit()
 
     # Returning tuple(ID, SURNAME, NAME, Patronymic, Phone_Number, Login, Password) of user if it's exists
     @classmethod
@@ -127,7 +127,7 @@ class DB:
         # Executing the query
         cls.cur.execute(query, (name, descr, price))
         # Commit changes into main Database
-        #cls.db.commit()
+        cls.db.commit()
 
     # Adding deal into table
     @classmethod
@@ -153,7 +153,7 @@ class DB:
             """
         cls.cur.execute(query, (userID, recordID, type, descr))
 
-        #cls.db.commit()
+        cls.db.commit()
     # Getting description from table by ID
     @classmethod
     def getUnconfRecordDescr(cls, recordID):
@@ -171,7 +171,7 @@ class DB:
         """
         cls.cur.execute(query, (recordID, ))
 
-        #cls.db.commit()
+        cls.db.commit()
     # Delete user from any table in the database
     @classmethod
     def deleteUser(cls, userID, table):
