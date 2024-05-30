@@ -75,7 +75,7 @@ class MakeDealWindow(MainWindow):
         discount = len(sums) * 4
         totalSum = sum(sums) * (1 - discount / 100) * 1.072
         dealInfo["Скидка"] = discount
-        dealInfo["Сумма сделки"] = totalSum
+        dealInfo["Сумма сделки"] = float("{:.2f}".format(totalSum))
 
         return dealInfo
 
