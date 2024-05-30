@@ -16,11 +16,7 @@ class Offers{
     Descr: str
     Price: int
 }
-class Admins{
-    ID: int
-    --
-    Name: str
-}
+
 class Notaries{
     ID: int
     --
@@ -48,12 +44,31 @@ class EntryData{
     Password: str
 }
 
+class Admins{
+    User_ID: int
+    --
+    Login: str
+    Password: str
+}
+
+class UnconfirmedRecords{
+    ID: int
+    --
+    USER_ID: int
+    RECORD_ID: int
+    TYPE: str
+    DESCRIPTION: str
+}
+
 EntryData }-- Client
 EntryData }-- Notaries
 EntryData }-- Admins
-
 Offers }-- CompletedDeals
 CompletedDeals }-- Client
 CompletedDeals }-- Notaries
+UnconfirmedRecords }-- Admins
+UnconfirmedRecords }-- Client
+UnconfirmedRecords }-- Notaries
+
 
 @enduml

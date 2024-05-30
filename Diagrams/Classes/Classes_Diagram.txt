@@ -4,55 +4,65 @@ class Client{}
 
 class Notary{}
 
-class NotaryDatabase{
-    Notary Database
-    add_notary(Notary)
-    remove_notary(ID)
-    update_db()
-    get_info(ID)
-}
-
-class ClientDatabase{
-    Client Database
-    get_info(ID)
-    add_client(Client)
-    remove_client(ID)
-    update_db()
-    
+class DB{
+    isLoginExists()
+    updateTable()
+    getUser()
+    getUsers()
+    getInfoFromCompletedDeals()
+    getClientsByNotaryID()
+    getNotariesNameByID()
+    getNotariesNames()
+    addUser()
+    addOffer()
+    addDeal()
+    addUnconfRecord()
+    getUnconfRecordDescr()
+    deleteUnconfRecord()
+    deleteUser()
 }
 
 class AdminWindow{
-    display_window()
-    get_client_list_btn_clicked()
-    update_notary_list_btn_clicked()
-    exit_btn_clicked()
+    toClientsViewWindowClicked()
+    toEditNotaryWindowClicked()
+    toRecordsBtnClicked()
+    toAuthWindowClicked()
 }
 
-class UpdateNotaryListWindow{
-    Display_window()
-    Update_db_btn_clicked()
-    Add_notary_btn_clicked()
-    Cancel_btn_clicked()
+class ClientsViewWindow{
+    searchData()
+    updateTable()
+    toMainWindow()
 }
 
-class AddNotaryWindow{
-    Display_window()
-    Confirm_btn_clicked()
-    Cancel_btn_clicked()
+class NotariesViewWindow{
+    searchData()
+    updateTable()
+    toMainWindow()
 }
 
-class ClientListWindow{
-    Display_window()
-    Exit_window()
+class NotaryAddWindow{
+    addUser()
+    toMainWindow()
 }
-ClientDatabase -up-> Client
-NotaryDatabase --> Notary
-AdminWindow -left-> NotaryDatabase
-AdminWindow --> ClientListWindow
-AdminWindow --> UpdateNotaryListWindow
-UpdateNotaryListWindow --> AddNotaryWindow
-UpdateNotaryListWindow --> NotaryDatabase
-ClientListWindow --> ClientDatabase
-AddNotaryWindow --> NotaryDatabase
-AdminWindow -right-> ClientDatabase
+
+class RecordsViewWindow{
+    searchData()
+    deleteRecord()
+    checkBtns()
+    toMainWindow()
+    applyRecord()
+    getDescr()
+}
+DB -left-> Client
+DB -> Notary
+AdminWindow --> DB
+AdminWindow -left-> ClientsViewWindow
+AdminWindow -right-> NotariesViewWindow
+AdminWindow -down-> RecordsViewWindow
+
+NotariesViewWindow--> NotaryAddWindow
+RecordsViewWindow --> DB
+ClientsViewWindow--> DB
+NotaryAddWindow--> DB
 @enduml
