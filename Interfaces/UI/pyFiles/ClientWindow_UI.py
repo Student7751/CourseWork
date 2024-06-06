@@ -12,10 +12,10 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 
 class Ui_ClientWindow(object):
-    def setupUi(self, MainWindow):
-        MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(522, 396)
-        self.centralwidget = QtWidgets.QWidget(MainWindow)
+    def setupUi(self, ClientWindow):
+        ClientWindow.setObjectName("ClientWindow")
+        ClientWindow.resize(517, 466)
+        self.centralwidget = QtWidgets.QWidget(ClientWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.label = QtWidgets.QLabel(self.centralwidget)
         self.label.setGeometry(QtCore.QRect(-6, -5, 631, 481))
@@ -34,7 +34,7 @@ class Ui_ClientWindow(object):
 "border: 1px solid #000000")
         self.completedDealsBtn.setObjectName("completedDealsBtn")
         self.exitBtn = QtWidgets.QPushButton(self.centralwidget)
-        self.exitBtn.setGeometry(QtCore.QRect(130, 280, 281, 41))
+        self.exitBtn.setGeometry(QtCore.QRect(130, 340, 281, 41))
         font = QtGui.QFont()
         font.setBold(True)
         font.setWeight(75)
@@ -55,13 +55,13 @@ class Ui_ClientWindow(object):
 "background-color: rgb(255, 192, 66);\n"
 "border: 1px solid #000000")
         self.makeDealBtn.setObjectName("makeDealBtn")
-        self.label_2 = QtWidgets.QLabel(self.centralwidget)
-        self.label_2.setGeometry(QtCore.QRect(80, 50, 381, 31))
+        self.welcome = QtWidgets.QLabel(self.centralwidget)
+        self.welcome.setGeometry(QtCore.QRect(80, 50, 381, 31))
         font = QtGui.QFont()
         font.setPointSize(12)
-        self.label_2.setFont(font)
-        self.label_2.setStyleSheet("color: rgb(38, 18, 148);")
-        self.label_2.setObjectName("label_2")
+        self.welcome.setFont(font)
+        self.welcome.setStyleSheet("color: rgb(38, 18, 148);")
+        self.welcome.setObjectName("welcome")
         self.label_3 = QtWidgets.QLabel(self.centralwidget)
         self.label_3.setGeometry(QtCore.QRect(190, 110, 161, 31))
         font = QtGui.QFont()
@@ -71,16 +71,28 @@ class Ui_ClientWindow(object):
         self.label_3.setFont(font)
         self.label_3.setStyleSheet("color: rgb(38, 18, 148);")
         self.label_3.setObjectName("label_3")
-        MainWindow.setCentralWidget(self.centralwidget)
+        self.profileBtn = QtWidgets.QPushButton(self.centralwidget)
+        self.profileBtn.setGeometry(QtCore.QRect(130, 280, 281, 41))
+        font = QtGui.QFont()
+        font.setBold(True)
+        font.setWeight(75)
+        self.profileBtn.setFont(font)
+        self.profileBtn.setStyleSheet("border-color: rgb(255, 249, 62);\n"
+"border-radius: 20px;\n"
+"background-color: rgb(255, 192, 66);\n"
+"border: 1px solid #000000")
+        self.profileBtn.setObjectName("profileBtn")
+        ClientWindow.setCentralWidget(self.centralwidget)
 
-        self.retranslateUi(MainWindow)
-        QtCore.QMetaObject.connectSlotsByName(MainWindow)
+        self.retranslateUi(ClientWindow)
+        QtCore.QMetaObject.connectSlotsByName(ClientWindow)
 
-    def retranslateUi(self, MainWindow):
+    def retranslateUi(self, ClientWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.completedDealsBtn.setText(_translate("MainWindow", "СОВЕРШЁННЫЕ СДЕЛКИ"))
-        self.exitBtn.setText(_translate("MainWindow", "ВЫХОД"))
-        self.makeDealBtn.setText(_translate("MainWindow", "ЗАКЛЮЧИТЬ СДЕЛКУ"))
-        self.label_2.setText(_translate("MainWindow", "Добро пожаловать в систему, username!"))
-        self.label_3.setText(_translate("MainWindow", "Выберите действие"))
+        ClientWindow.setWindowTitle(_translate("ClientWindow", "MainWindow"))
+        self.completedDealsBtn.setText(_translate("ClientWindow", "СОВЕРШЁННЫЕ СДЕЛКИ"))
+        self.exitBtn.setText(_translate("ClientWindow", "ВЫХОД"))
+        self.makeDealBtn.setText(_translate("ClientWindow", "ЗАКЛЮЧИТЬ СДЕЛКУ"))
+        self.welcome.setText(_translate("ClientWindow", "Добро пожаловать в систему, username!"))
+        self.label_3.setText(_translate("ClientWindow", "Выберите действие"))
+        self.profileBtn.setText(_translate("ClientWindow", "ПРОФИЛЬ"))

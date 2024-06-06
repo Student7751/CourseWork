@@ -46,19 +46,19 @@
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-image: url(:/img/C:/Users/Игорь/Downloads/still-life-with-scales-justice.jpg);</string>
+     <string notr="true"/>
     </property>
     <property name="text">
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap resource="D:/PyQt/zal.qrc">:/img/C:/Users/Игорь/Downloads/still-life-with-scales-justice.jpg</pixmap>
+     <pixmap resource="../Icons/icons.qrc">:/icons/woman.png</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton">
+   <widget class="QPushButton" name="AuthBtn">
     <property name="geometry">
      <rect>
       <x>570</x>
@@ -83,7 +83,7 @@ border: 1px solid #000000</string>
      <string>ВОЙТИ</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_2">
+   <widget class="QPushButton" name="RegistrBtn">
     <property name="geometry">
      <rect>
       <x>540</x>
@@ -108,7 +108,7 @@ border: 1px solid #000000</string>
      <string>РЕГИСТРАЦИЯ</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineEdit_2">
+   <widget class="QLineEdit" name="passEdit">
     <property name="geometry">
      <rect>
       <x>540</x>
@@ -124,7 +124,7 @@ border: 1px solid #000000</string>
      <string>Введите пароль</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineEdit_3">
+   <widget class="QLineEdit" name="logEdit">
     <property name="geometry">
      <rect>
       <x>540</x>
@@ -220,7 +220,7 @@ border: 1px solid #000000</string>
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap resource="D:/PyQt/zal.qrc">:/img/C:/Users/Игорь/Downloads/user-orange_25327.png</pixmap>
+     <pixmap resource="../Icons/icons.qrc">:/icons/user-orange_25327.png</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
@@ -242,7 +242,7 @@ border: 1px solid #000000</string>
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap resource="D:/PyQt/zal.qrc">:/img/C:/Users/Игорь/Downloads/cslogin_104358.png</pixmap>
+     <pixmap resource="../Icons/icons.qrc">:/icons/cslogin_104358.png</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
@@ -251,7 +251,7 @@ border: 1px solid #000000</string>
   </widget>
  </widget>
  <resources>
-  <include location="D:/PyQt/zal.qrc"/>
+  <include location="../Icons/icons.qrc"/>
  </resources>
  <connections/>
 </ui>

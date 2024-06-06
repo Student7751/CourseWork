@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>MainWindow</class>
- <widget class="QMainWindow" name="MainWindow">
+ <class>ClientWindow</class>
+ <widget class="QMainWindow" name="ClientWindow">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>522</width>
-    <height>396</height>
+    <width>517</width>
+    <height>466</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -30,7 +30,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_2">
+   <widget class="QPushButton" name="completedDealsBtn">
     <property name="geometry">
      <rect>
       <x>130</x>
@@ -55,11 +55,11 @@ border: 1px solid #000000</string>
      <string>СОВЕРШЁННЫЕ СДЕЛКИ</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_3">
+   <widget class="QPushButton" name="exitBtn">
     <property name="geometry">
      <rect>
       <x>130</x>
-      <y>280</y>
+      <y>340</y>
       <width>281</width>
       <height>41</height>
      </rect>
@@ -80,7 +80,7 @@ border: 1px solid #000000</string>
      <string>ВЫХОД</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_4">
+   <widget class="QPushButton" name="makeDealBtn">
     <property name="geometry">
      <rect>
       <x>130</x>
@@ -105,7 +105,7 @@ border: 1px solid #000000</string>
      <string>ЗАКЛЮЧИТЬ СДЕЛКУ</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_2">
+   <widget class="QLabel" name="welcome">
     <property name="geometry">
      <rect>
       <x>80</x>
@@ -147,6 +147,31 @@ border: 1px solid #000000</string>
     </property>
     <property name="text">
      <string>Выберите действие</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="profileBtn">
+    <property name="geometry">
+     <rect>
+      <x>130</x>
+      <y>280</y>
+      <width>281</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-color: rgb(255, 249, 62);
+border-radius: 20px;
+background-color: rgb(255, 192, 66);
+border: 1px solid #000000</string>
+    </property>
+    <property name="text">
+     <string>ПРОФИЛЬ</string>
     </property>
    </widget>
   </widget>

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>MainWindow</class>
- <widget class="QMainWindow" name="MainWindow">
+ <class>NotaryAddWindow</class>
+ <widget class="QMainWindow" name="NotaryAddWindow">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
     <width>492</width>
-    <height>418</height>
+    <height>376</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -30,11 +30,11 @@
      <string/>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton">
+   <widget class="QPushButton" name="addNotaryBtn">
     <property name="geometry">
      <rect>
       <x>140</x>
-      <y>300</y>
+      <y>260</y>
       <width>231</width>
       <height>41</height>
      </rect>
@@ -55,11 +55,11 @@ border: 1px solid #000000</string>
      <string>ЗАРЕГИСТРИРОВАТЬ</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_2">
+   <widget class="QPushButton" name="cancelBtn">
     <property name="geometry">
      <rect>
       <x>200</x>
-      <y>350</y>
+      <y>310</y>
       <width>111</width>
       <height>41</height>
      </rect>
@@ -80,11 +80,11 @@ border: 1px solid #000000</string>
      <string>ОТМЕНА</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineEdit">
+   <widget class="QLineEdit" name="initialsEdit">
     <property name="geometry">
      <rect>
       <x>100</x>
-      <y>100</y>
+      <y>50</y>
       <width>311</width>
       <height>31</height>
      </rect>
@@ -96,7 +96,26 @@ border: 1px solid #000000</string>
      <string>Введите ФИО..</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineEdit_2">
+   <widget class="QLineEdit" name="numberEdit">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>100</y>
+      <width>311</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-radius: 10px;</string>
+    </property>
+    <property name="maxLength">
+     <number>11</number>
+    </property>
+    <property name="placeholderText">
+     <string>Введите номер телефона..</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="logEdit">
     <property name="geometry">
      <rect>
       <x>100</x>
@@ -109,10 +128,10 @@ border: 1px solid #000000</string>
      <string notr="true">border-radius: 10px;</string>
     </property>
     <property name="placeholderText">
-     <string>Введите номер телефона..</string>
+     <string>Введите логин..</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineEdit_3">
+   <widget class="QLineEdit" name="passEdit">
     <property name="geometry">
      <rect>
       <x>100</x>
@@ -125,46 +144,14 @@ border: 1px solid #000000</string>
      <string notr="true">border-radius: 10px;</string>
     </property>
     <property name="placeholderText">
-     <string>Введите логин..</string>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="lineEdit_4">
-    <property name="geometry">
-     <rect>
-      <x>100</x>
-      <y>250</y>
-      <width>311</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">border-radius: 10px;</string>
-    </property>
-    <property name="placeholderText">
      <string>Введите пароль..</string>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="lineEdit_5">
-    <property name="geometry">
-     <rect>
-      <x>100</x>
-      <y>50</y>
-      <width>181</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">border-radius: 10px;</string>
-    </property>
-    <property name="placeholderText">
-     <string>Введите ID..(Необязательно)</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_2">
     <property name="geometry">
      <rect>
       <x>60</x>
-      <y>250</y>
+      <y>200</y>
       <width>31</width>
       <height>31</height>
      </rect>
@@ -173,13 +160,51 @@ border: 1px solid #000000</string>
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap resource="D:/PyQt/zal.qrc">:/img/C:/Users/Игорь/Downloads/cslogin_104358.png</pixmap>
+     <pixmap resource="../Icons/icons.qrc">:/icons/cslogin_104358.png</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
     </property>
    </widget>
    <widget class="QLabel" name="label_3">
+    <property name="geometry">
+     <rect>
+      <x>60</x>
+      <y>50</y>
+      <width>31</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap resource="../Icons/icons.qrc">:/icons/user-orange_25327.png</pixmap>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_4">
+    <property name="geometry">
+     <rect>
+      <x>60</x>
+      <y>150</y>
+      <width>31</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap resource="../Icons/icons.qrc">:/icons/message_12953390.png</pixmap>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_5">
     <property name="geometry">
      <rect>
       <x>60</x>
@@ -192,73 +217,80 @@ border: 1px solid #000000</string>
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap resource="D:/PyQt/zal.qrc">:/img/C:/Users/Игорь/Downloads/user-orange_25327.png</pixmap>
+     <pixmap resource="../Icons/icons.qrc">:/icons/calling_12550156.png</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
     </property>
    </widget>
-   <widget class="QLabel" name="label_4">
+   <widget class="QLabel" name="initialsLine">
     <property name="geometry">
      <rect>
-      <x>60</x>
-      <y>200</y>
-      <width>31</width>
-      <height>31</height>
+      <x>100</x>
+      <y>120</y>
+      <width>301</width>
+      <height>16</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(11, 29, 148);</string>
     </property>
     <property name="text">
      <string/>
-    </property>
-    <property name="pixmap">
-     <pixmap resource="D:/PyQt/zal.qrc">:/img/C:/Users/Игорь/Downloads/message_12953390.png</pixmap>
-    </property>
-    <property name="scaledContents">
-     <bool>true</bool>
     </property>
    </widget>
-   <widget class="QLabel" name="label_5">
+   <widget class="QLabel" name="numberLine">
     <property name="geometry">
      <rect>
-      <x>60</x>
-      <y>150</y>
-      <width>31</width>
-      <height>31</height>
+      <x>100</x>
+      <y>170</y>
+      <width>301</width>
+      <height>16</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(11, 29, 148);</string>
     </property>
     <property name="text">
      <string/>
-    </property>
-    <property name="pixmap">
-     <pixmap resource="D:/PyQt/zal.qrc">:/img/C:/Users/Игорь/Downloads/calling_12550156.png</pixmap>
-    </property>
-    <property name="scaledContents">
-     <bool>true</bool>
     </property>
    </widget>
-   <widget class="QLabel" name="label_6">
+   <widget class="QLabel" name="logLine">
     <property name="geometry">
      <rect>
-      <x>60</x>
-      <y>50</y>
-      <width>31</width>
-      <height>31</height>
+      <x>100</x>
+      <y>220</y>
+      <width>301</width>
+      <height>16</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(11, 29, 148);</string>
     </property>
     <property name="text">
      <string/>
     </property>
-    <property name="pixmap">
-     <pixmap resource="D:/PyQt/zal.qrc">:/img/C:/Users/Игорь/Downloads/id-card_5796902.png</pixmap>
+   </widget>
+   <widget class="QLabel" name="passLine">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>270</y>
+      <width>301</width>
+      <height>16</height>
+     </rect>
     </property>
-    <property name="scaledContents">
-     <bool>true</bool>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(11, 29, 148);</string>
+    </property>
+    <property name="text">
+     <string/>
     </property>
    </widget>
   </widget>
  </widget>
  <resources>
-  <include location="D:/PyQt/zal.qrc"/>
+  <include location="../Icons/icons.qrc"/>
  </resources>
  <connections/>
 </ui>

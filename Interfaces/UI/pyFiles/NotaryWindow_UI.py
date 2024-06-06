@@ -14,11 +14,11 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_NotaryWindow(object):
     def setupUi(self, NotaryWindow):
         NotaryWindow.setObjectName("NotaryWindow")
-        NotaryWindow.resize(479, 434)
+        NotaryWindow.resize(479, 426)
         self.centralwidget = QtWidgets.QWidget(NotaryWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.label = QtWidgets.QLabel(self.centralwidget)
-        self.label.setGeometry(QtCore.QRect(-6, -5, 631, 481))
+        self.label.setGeometry(QtCore.QRect(-6, -5, 631, 491))
         self.label.setStyleSheet("background-color: qlineargradient(spread:reflect, x1:0.0201244, y1:0.96, x2:1, y2:0, stop:0.0746269 rgba(74, 74, 74, 255), stop:0.950249 rgba(197, 197, 197, 255));")
         self.label.setText("")
         self.label.setObjectName("label")

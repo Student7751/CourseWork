@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>MainWindow</class>
- <widget class="QMainWindow" name="MainWindow">
+ <class>ConfirmDealWindow</class>
+ <widget class="QMainWindow" name="ConfirmDealWindow">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -30,7 +30,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QTextEdit" name="textEdit">
+   <widget class="QTextEdit" name="aboutOffer">
     <property name="geometry">
      <rect>
       <x>23</x>
@@ -46,6 +46,13 @@ background: white;</string>
     <property name="readOnly">
      <bool>true</bool>
     </property>
+    <property name="html">
+     <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:7.8pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;Данный документ подтверждает совершение сделки. Ниже перечислены подробные сведения о сделке. Пожалуйста, прежде чем приступать к оформлению сделки ознакомьтесь с данным документом! После подтверждения сделки она вступает в силу и её отмена невозможна. В случае каких-либо проблем с любыми вопросами обращаться к нотариусу с которым была заключена сделка. Подробные сведения:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
     <property name="textInteractionFlags">
      <set>Qt::NoTextInteraction</set>
     </property>
@@ -55,12 +62,13 @@ background: white;</string>
      <rect>
       <x>320</x>
       <y>20</y>
-      <width>141</width>
+      <width>161</width>
       <height>16</height>
      </rect>
     </property>
     <property name="font">
      <font>
+      <pointsize>9</pointsize>
       <weight>75</weight>
       <bold>true</bold>
      </font>
@@ -72,7 +80,7 @@ background: white;</string>
      <string>Документ о сделке</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton">
+   <widget class="QPushButton" name="cancelBtn">
     <property name="geometry">
      <rect>
       <x>630</x>
@@ -97,7 +105,7 @@ border: 1px solid #000000</string>
      <string>Отменить сделку</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_2">
+   <widget class="QPushButton" name="confirmBtn">
     <property name="geometry">
      <rect>
       <x>300</x>
@@ -122,7 +130,7 @@ border: 1px solid #000000</string>
      <string>Подтвердить</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_3">
+   <widget class="QPushButton" name="downloadBtn">
     <property name="geometry">
      <rect>
       <x>30</x>

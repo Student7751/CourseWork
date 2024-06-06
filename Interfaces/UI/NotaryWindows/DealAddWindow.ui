@@ -30,7 +30,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineEdit">
+   <widget class="QLineEdit" name="dealName">
     <property name="geometry">
      <rect>
       <x>40</x>
@@ -46,7 +46,7 @@
      <string>Введите название услуги..</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineEdit_2">
+   <widget class="QLineEdit" name="dealPrice">
     <property name="geometry">
      <rect>
       <x>390</x>
@@ -62,24 +62,7 @@
      <string>Введите цену..</string>
     </property>
    </widget>
-   <widget class="QTextEdit" name="textEdit">
-    <property name="geometry">
-     <rect>
-      <x>40</x>
-      <y>80</y>
-      <width>481</width>
-      <height>311</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">border-radius: 10px;
-background: white;</string>
-    </property>
-    <property name="placeholderText">
-     <string>Введите описание..</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="pushButton">
+   <widget class="QPushButton" name="cancelBtn">
     <property name="geometry">
      <rect>
       <x>380</x>
@@ -104,7 +87,7 @@ border: 1px solid #000000</string>
      <string>НАЗАД</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_2">
+   <widget class="QPushButton" name="addDealBtn">
     <property name="geometry">
      <rect>
       <x>40</x>
@@ -129,10 +112,29 @@ border: 1px solid #000000</string>
      <string>ДОБАВИТЬ</string>
     </property>
    </widget>
+   <widget class="QLineEdit" name="dealDescr">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>70</y>
+      <width>481</width>
+      <height>321</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-radius: 10px;</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+    </property>
+    <property name="placeholderText">
+     <string>Введите описание..</string>
+    </property>
+   </widget>
   </widget>
  </widget>
  <resources>
-  <include location="D:/PyQt/zal.qrc"/>
+  <include location="../../../../PyQt/zal.qrc"/>
  </resources>
  <connections/>
 </ui>

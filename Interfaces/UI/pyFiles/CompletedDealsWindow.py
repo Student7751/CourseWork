@@ -13,9 +13,8 @@ class CompletedDealsWindow(MainWindow):
         super().__init__(6)
         # Getting main client data
         self.clientData = data
-        print(data[0])
         # Filling table
-        TableModel.fillTable(self.ui.DealsTable, "completeddeals", 0, self.clientData[0])
+        TableModel.fillTable(self.ui.DealsTable, "completeddeals", False, self.clientData[0])
         # Connecting signals to slots
         self.ui.BackBtn.clicked.connect(self.toMainWindow)
         self.ui.searchEdit.textChanged.connect(self.searchData)

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>MainWindow</class>
- <widget class="QMainWindow" name="MainWindow">
+ <class>CompletedDealsWindow</class>
+ <widget class="QMainWindow" name="CompletedDealsWindow">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
     <width>802</width>
-    <height>564</height>
+    <height>596</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -30,11 +30,11 @@
      <string/>
     </property>
    </widget>
-   <widget class="QTableWidget" name="NotariesTable">
+   <widget class="QTableWidget" name="DealsTable">
     <property name="geometry">
      <rect>
       <x>30</x>
-      <y>60</y>
+      <y>100</y>
       <width>751</width>
       <height>411</height>
      </rect>
@@ -42,12 +42,67 @@
     <property name="styleSheet">
      <string notr="true">background-color: rgb(161, 161, 161);</string>
     </property>
+    <property name="editTriggers">
+     <set>QAbstractItemView::NoEditTriggers</set>
+    </property>
+    <property name="tabKeyNavigation">
+     <bool>false</bool>
+    </property>
+    <property name="showDropIndicator" stdset="0">
+     <bool>false</bool>
+    </property>
+    <property name="dragDropOverwriteMode">
+     <bool>false</bool>
+    </property>
+    <property name="selectionMode">
+     <enum>QAbstractItemView::ExtendedSelection</enum>
+    </property>
     <attribute name="horizontalHeaderStretchLastSection">
      <bool>true</bool>
     </attribute>
     <column>
      <property name="text">
       <string>ID</string>
+     </property>
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="foreground">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>32</red>
+        <green>34</green>
+        <blue>156</blue>
+       </color>
+      </brush>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Deal_Name</string>
+     </property>
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="foreground">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>32</red>
+        <green>34</green>
+        <blue>156</blue>
+       </color>
+      </brush>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Discount</string>
      </property>
      <property name="font">
       <font>
@@ -87,7 +142,7 @@
     </column>
     <column>
      <property name="text">
-      <string>Name</string>
+      <string>Price</string>
      </property>
      <property name="font">
       <font>
@@ -107,7 +162,7 @@
     </column>
     <column>
      <property name="text">
-      <string>Price</string>
+      <string>Date</string>
      </property>
      <property name="font">
       <font>
@@ -153,7 +208,7 @@
     <property name="geometry">
      <rect>
       <x>640</x>
-      <y>490</y>
+      <y>530</y>
       <width>141</width>
       <height>41</height>
      </rect>
@@ -174,8 +229,42 @@ border: 1px solid #000000</string>
      <string>НАЗАД</string>
     </property>
    </widget>
+   <widget class="QLineEdit" name="searchEdit">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>60</y>
+      <width>691</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-radius:10px</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_3">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>60</y>
+      <width>31</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap resource="../Icons/icons.qrc">:/icons/search_200941.png</pixmap>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
+    </property>
+   </widget>
   </widget>
  </widget>
- <resources/>
+ <resources>
+  <include location="../Icons/icons.qrc"/>
+ </resources>
  <connections/>
 </ui>

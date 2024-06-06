@@ -23,6 +23,7 @@ class Ui_NotaryClientViewWindow(object):
         self.label.setText("")
         self.label.setObjectName("label")
         self.clientsTable = QtWidgets.QTableWidget(self.centralwidget)
+        self.clientsTable.setSelectionBehavior(QtWidgets.QTableWidget.SelectRows)
         self.clientsTable.setGeometry(QtCore.QRect(50, 100, 781, 411))
         font = QtGui.QFont()
         font.setBold(True)

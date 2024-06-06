@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>MainWindow</class>
- <widget class="QMainWindow" name="MainWindow">
+ <class>AdminWindow</class>
+ <widget class="QMainWindow" name="AdminWindow">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
     <width>482</width>
-    <height>405</height>
+    <height>464</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -30,7 +30,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_2">
+   <widget class="QPushButton" name="toEditNotaryWindow">
     <property name="geometry">
      <rect>
       <x>80</x>
@@ -55,11 +55,11 @@ border: 1px solid #000000</string>
      <string>РЕДАКТИРОВАТЬ НОТАРИУСОВ</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_3">
+   <widget class="QPushButton" name="toAuthWindow">
     <property name="geometry">
      <rect>
       <x>80</x>
-      <y>310</y>
+      <y>380</y>
       <width>321</width>
       <height>41</height>
      </rect>
@@ -80,7 +80,7 @@ border: 1px solid #000000</string>
      <string>ВЫХОД</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_4">
+   <widget class="QPushButton" name="toClientsViewWindow">
     <property name="geometry">
      <rect>
       <x>80</x>
@@ -147,6 +147,31 @@ border: 1px solid #000000</string>
     </property>
     <property name="text">
      <string>Выберите действие</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="toRecordsBtn">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>310</y>
+      <width>321</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-color: rgb(255, 249, 62);
+border-radius: 20px;
+background-color: rgb(255, 192, 66);
+border: 1px solid #000000</string>
+    </property>
+    <property name="text">
+     <string>ПРОСМОТРЕТЬ СПИСОК ЗАЯВОК</string>
     </property>
    </widget>
   </widget>
