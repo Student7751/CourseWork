@@ -54,10 +54,10 @@ class Admins{
 class UnconfirmedRecords{
     ID: int
     --
-    USER_ID: int
-    RECORD_ID: int
-    TYPE: str
-    DESCRIPTION: str
+    User_ID: int
+    Record_ID: int
+    Type: str
+    Description: str
 }
 
 EntryData }-- Client
@@ -66,9 +66,9 @@ EntryData }-- Admins
 Offers }-- CompletedDeals
 CompletedDeals }-- Client
 CompletedDeals }-- Notaries
-UnconfirmedRecords }-- Admins
-UnconfirmedRecords }-- Client
 UnconfirmedRecords }-- Notaries
+UnconfirmedRecords }-right- Offers
+
 
 
 @enduml

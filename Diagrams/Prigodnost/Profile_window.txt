@@ -1,0 +1,34 @@
+@startuml
+skinparam actorStyle awesome
+
+boundary "Окно пользователя" as user_window
+boundary "Окно предупреждения" as warning_window #yellow
+boundary "Окно редактирования профиля" as profile_window
+
+actor "Пользователь" as user
+
+Entity "База данных" as DB
+
+control "Сохранение изменений" as validation_control
+control "Загрузка данных пользователя" as load_control
+control "Отобразить окно предупреждения" as warning_control #yellow
+control "Отобразить окно пользователя" as load_window
+
+user --> profile_window
+
+profile_window -down-> load_window: Нажата кнопка назад
+load_window --> user_window
+
+profile_window --> load_control
+load_control --> DB
+
+profile_window --> warning_control : Данные некорректны\nНажата кнопка применить
+warning_control --> warning_window
+
+profile_window --> validation_control: Данные корректны\nНажата кнопка применить
+validation_control --> DB
+
+
+user_window -up- user
+warning_window -- user
+@enduml

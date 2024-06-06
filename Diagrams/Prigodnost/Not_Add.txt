@@ -8,15 +8,14 @@ user -- edit_window
 
 control "Добавить услугу" as add_control
 control "Отмена" as cancel_control
-control error as "Ошибка" #red
 
 entity "База данных" as DB
 
 edit_window --> add_control: Нажата кнопка Добавить услугу
 edit_window --> cancel_control: Нажата кнопка Отмена
 
-add_control --> DB: Введены корректные данные\nСохранение изменений
-add_control --> error: Введены\nНекорректные данные
+add_control --> DB: Сохранение изменений
+
 cancel_control --> main_window
 
 

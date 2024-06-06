@@ -2,18 +2,31 @@ actor admin as "Администратор"
 
 boundary "Окно роли\nАдминистратора" as main_window
 boundary "Окно Редактирования нотариусов" as notarius_update_window
+boundary "Окно добавления нотариусов" as add_notarius_window
 
 entity "БД нотариусов" as notarius_db
 
+control error as "Ошибка" #red
+
 admin -> main_window : Нажимает кнопку\n'Редактировать нотариусов'
 
-main_window -> notarius_update_window : Отобразить
+main_window -> notarius_update_window : Создание окна
+notarius_update_window  --> admin
 notarius_update_window -> notarius_db : Загрузка данных
+notarius_db --> notarius_update_window 
 
-admin -> notarius_update_window: Нажимает кнопку 'Обновить таблицу'
+admin -> notarius_update_window: Нажимает кнопку 'Добавить элемент'
+notarius_update_window -> add_notarius_window: Создание окна
+add_notarius_window --> admin 
+admin -> add_notarius_window: Нажимает кнопку "Подтвердить"
 
-notarius_update_window --> notarius_db: Сохранение изменений
-notarius_db --> notarius_update_window: Возврат
+alt Поля добавления пусты
+    add_notarius_window -> error : Генерация ошибки
+    error --> add_notarius_window
+else Поля добавления не пусты
+    add_notarius_window -> notarius_db : Сохранение данных
+    add_notarius_window --> notarius_update_window
+end
 
 opt Нажата кнопка 'Назад'
     admin -> notarius_update_window : Нажата кнопка 'Назад'

@@ -1,24 +1,28 @@
 @startuml
+skinparam actorStyle awesome
+
 boundary "Окно совершенных сделок" as client_view_window
-boundary "Главное окно" as main_window
+boundary "Главное окно клиента" as main_window
 
 actor "Клиент" as user
 
 
-control "Назад" as back_control
+control "Отображение главного окна" as back_control
+control "Отображение окна \nсовершенных сделок" as deals_control
+
 control "Загрузка данных" as load_control
-control "Ошибка" as error #red
 
-user -- client_view_window
 
+user -- main_window
+main_window --> deals_control : Нажата кнопка\nсовершенных сделок
+deals_control --> client_view_window
 entity "База данных" as DB
 
 client_view_window --> back_control: Нажата кнопка Назад
 back_control --> main_window
 client_view_window --> load_control
-DB  <-- load_control: Запрос списка сделок
-DB --> client_view_window : Возврат
-DB-left-> error: БД пуста
+DB  <-- load_control
 
+main_window -up- user
 
 @enduml

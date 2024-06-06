@@ -1,22 +1,24 @@
 @startuml
-boundary "Окно просмотра клиентов" as client_view_window
+skinparam actorStyle awesome
+
+boundary "Окно редактирования клиентов" as client_edit_window
 boundary "Главное окно" as main_window
 
 actor "Администратор" as user
 
 
-control "Назад" as back_control
-control "Загрузка данных" as load_control
-control "Ошибка" as error #red
+control "Отображние главного окна" as back_control
+control "Обновить таблицу" as update_control
 
-user -- client_view_window
+user -- client_edit_window
 
 entity "База данных" as DB
 
-client_view_window --> back_control: Нажата кнопка Назад
+client_edit_window--> back_control: Нажата кнопка Назад
 back_control --> main_window
-client_view_window --> load_control
-DB  <-- load_control: Запрос списка клиентов
-DB --> client_view_window: Возврат данных
-DB -left-> error: БД пуста
+client_edit_window--> update_control : Выбраны чекбоксы\nНажата кнопка\nобновить таблицу
+update_control --> DB
+
+main_window -up- user
+
 @enduml

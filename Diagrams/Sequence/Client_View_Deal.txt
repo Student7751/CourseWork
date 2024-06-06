@@ -2,30 +2,22 @@
 
 actor admin as "Клиент"
 
-boundary "Окно роли\nКлиента" as main_window
-boundary "Окно Списка Сделок" as deal_list_window
+boundary "Главное окно\nКлиента" as main_window
+boundary "Окно совершенных сделок" as deal_list_window
 
-entity "БД Совершенных сделок" as deal_db
-
-control error as "Ошибка" #red
+entity "База данных" as deal_db
 
 admin -> main_window : Нажимает кнопку 'Совершенные сделки'
 
-main_window -> deal_list_window : Отобразить
+main_window -> deal_list_window : Отображение окна\nсовершенных сделок
+deal_list_window --> admin
 deal_list_window -> deal_db : Загрузка данных
+deal_db --> deal_list_window 
 
-alt БД пуста
-    deal_list_window -> error : Отобразить
-    error --> main_window : Возврат
-else БД не пуста
-    deal_list_window -> deal_list_window : Отобразить клиентов
-    deal_list_window --> admin : Возврат
-end
-
-opt Нажата кнопка 'Назад'
+alt Нажата кнопка 'Назад'
     admin -> deal_list_window : Нажата кнопка 'Назад'
-    deal_list_window -> main_window : Отобразить
-    main_window --> admin : Возврат
+    deal_list_window -> main_window: Отображение главного окна
+    main_window --> admin
 end
 
 @enduml

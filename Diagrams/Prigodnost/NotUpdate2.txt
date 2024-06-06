@@ -1,0 +1,36 @@
+@startuml
+skinparam actorStyle awesome
+
+boundary "Окно редактирования" as edit_window
+boundary "Окно добавления услуги" as add_window
+
+boundary "Окно предупреждения" as warning_window #yellow
+
+
+
+actor "Нотариус" as user
+
+Entity "База данных" as DB
+
+user -right- edit_window
+
+control "Отобразить окно редактирования" as main_control
+control "Отобразить окно\nдобавления услуги" as add_control
+control "Сохранение изменений" as save_control
+control "Загрузка данных" as load_control
+control "Отобразить окно\nпредупреждения" as warning_control #yellow
+
+edit_window --> load_control
+load_control --> DB
+add_window  --> save_control: Заполнены поля\nНажата кнопка добавить
+save_control --> DB
+add_window  --> warning_control : Некорректно заполнены поля\nНажата кнопка\nдобавить
+add_window --> main_control : Нажата кнопка\nназад
+main_control --> edit_window
+edit_window --> add_control: Нажата кнопка\nдобавить услугу
+add_control --> add_window
+warning_control  --> warning_window 
+
+warning_window -up- user
+add_window -up- user
+@enduml

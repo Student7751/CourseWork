@@ -1,0 +1,34 @@
+@startuml
+skinparam actorStyle awesome
+
+boundary "Главное окно" as main_window
+boundary "Окно редактирования нотариусов" as edit_window
+boundary "Окно предупреждения" as warning_window #yellow
+
+
+
+actor "Администратор" as user
+
+Entity "База данных" as DB
+
+user -- edit_window
+
+control "Отобразить главное окно" as main_control
+control "Сохранение изменений" as save_control
+control "Загрузка данных" as load_control
+
+control "Отобразить окно\nпредупреждения" as warning_control #yellow
+
+
+edit_window --> save_control: Выбраны чекбоксы\nНажата кнопка\nобновить таблицу
+edit_window --> load_control
+load_control --> DB
+save_control --> DB
+edit_window --> warning_control : Не выбраны чекбоксы\nНажата кнопка\nобновить таблицу
+edit_window --> main_control: Нажата кнопка назад
+main_control --> main_window
+warning_control  --> warning_window 
+
+warning_window -up- user
+main_window -up- user
+@enduml

@@ -11,19 +11,20 @@ control error as "Ошибка" #red
 
 admin -> main_window : Нажимает кнопку 'Заключить сделку'
 
-main_window -> confirm_deal_window : Отобразить
+main_window -> confirm_deal_window : Создание окна
+confirm_deal_window  --> admin
 confirm_deal_window -> deal_db : Загрузка данных
+deal_db --> confirm_deal_window 
 
-alt Заявка пуста
-    confirm_deal_window -> error : Отобразить
-    error --> main_window : Возврат
-else Завяка не пуста
+alt Услуги не выбраны
+    confirm_deal_window -> error : Генерация ошибки
+    error --> main_window
+else Услуги выбраны
     admin -> confirm_deal_window: Нажата кнопка 'Подтвердить'
     confirm_deal_window -> deal_db : Сохранение данных
-    confirm_deal_window --> admin : Возврат
 end
 
-opt Нажата кнопка 'Отмена'
+opt Нажата кнопка 'Назад'
     admin -> confirm_deal_window : Нажата кнопка 'Отмена'
     confirm_deal_window -> main_window : Отобразить
     main_window --> admin : Возврат

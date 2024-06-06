@@ -1,0 +1,31 @@
+@startuml Auth
+
+actor user as "Пользователь"
+
+boundary main_window as "Окно пользователя"
+boundary profile_window as "Окно редактирования профиля"
+
+control warning as "Окно предупреждения" #yellow
+
+entity BD as "База данных"
+
+profile_window -> BD: Загрузка данных пользователя
+BD --> profile_window 
+
+user -> profile_window : Вводит данные и\nнажимает на кнопку Применить
+
+alt Данные корректны
+    main_window -> BD: Сохранение изменений
+
+else Данные некорректны
+    main_window -> warning: Отображение предупреждения
+    warning--> user
+
+end
+
+opt Нажата кнопка назад
+    profile_window -> main_window : Отобразить окно пользователя
+    main_window --> user
+end
+
+@enduml

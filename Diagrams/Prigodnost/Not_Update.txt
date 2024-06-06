@@ -1,4 +1,6 @@
 @startuml
+skinparam actorStyle awesome
+
 boundary "Главное окно" as main_window
 boundary "Окно редактирования" as edit_window
 boundary "Окно добавления услуг" as add_window
@@ -7,19 +9,23 @@ actor "Нотариус" as user
 
 Entity "База данных" as DB
 
-control "Редактировать услуги" as edit_control
+control "Отобразить окно\nредактирования" as edit_control
 control "Обновить таблицу" as refresh_control
-control "Добавить услугу" as add_control
-control "Отмена" as cancel_control
+control "Отобразить окно\nдобавления услуг" as add_control
+control "Отобразить главное окно" as cancel_control
+
 
 user -- main_window
 
-main_window --> edit_control
+main_window --> edit_control: Нажата кнопка\nредактировать услуги
 edit_window --> cancel_control: Нажата кнопка отмена
-cancel_control -> main_window
+cancel_control --> main_window
 edit_control --> edit_window
 edit_window --> refresh_control: Выбраны чекбоксы\nНажата кнопка\nобновить таблицу
-refresh_control -> DB: Удаление записей
+
+refresh_control --> DB
 edit_window --> add_control: Нажата кнопка добавить услугу
 add_control --> add_window
+
+add_window -up- user
 @enduml

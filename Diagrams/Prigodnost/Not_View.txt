@@ -1,23 +1,27 @@
 @startuml
-boundary "Окно просмотра клиентов" as client_view_window
+boundary "Окно подтверждения сделки" as confirm_deal_window
 boundary "Главное окно" as main_window
+boundary "Окно работы клиента" as work_window
 
-actor "Нотариус" as user
+actor "Клиент" as user
 
 
-control "Назад" as back_control
-control "Загрузка данных" as load_control
-control error as "Ошибка" #red
+control "Отмена" as back_control
+control "Сохранить документ" as save_control
+control "Подтвердить" as confirm_control
+control "Отобразить окно" as view_control
 
-user -- client_view_window
+user -- confirm_deal_window
+user -- work_window
 
+work_window -- view_control: Выбраны услуги\nНажата кнопка заключения сделки
 entity "База данных" as DB
 
-client_view_window --> back_control: Нажата кнопка Назад
+view_control -- confirm_deal_window
+confirm_deal_window --> back_control: Нажата кнопка Отмена
 back_control --> main_window
-client_view_window --> load_control
-DB  <-- load_control: Запрос списка клиентов
-DB --> client_view_window: Возврат списка клиентов
-DB -left-> error: БД пуста
+confirm_deal_window --> save_control: Нажата кнопка сохранения документа
+confirm_deal_window --> confirm_control: Нажата кнопка Подтвердить
+confirm_control --> DB: Сохранение иземений
 
 @enduml

@@ -1,0 +1,29 @@
+@startuml Not_Update
+
+actor admin as "Нотариус"
+
+boundary "Окно Редактирования" as update_offer_window
+boundary "Главное окно" as main_window
+
+entity "База данных услуг" as offers_db
+
+control error as "Окно предупреждения" #yellow
+
+update_offer_window -> offers_db : Загрузка данных
+offers_db --> update_offer_window
+
+admin -> update_offer_window: Нажимает кнопку 'Обновить таблицу'
+
+alt Чекбоксы выбраны
+    update_offer_window -> offers_db : Обновление данных
+else Чекбоксы не выбраны
+    update_offer_window --> error : Отображение окна предупреждения
+    error  --> update_offer_window
+end
+
+opt Нажата кнопка 'Назад'
+    update_offer_window -> main_window: Отобразить главное окно
+    main_window --> admin 
+end
+
+@enduml

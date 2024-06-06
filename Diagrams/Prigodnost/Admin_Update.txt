@@ -1,4 +1,6 @@
 @startuml
+skinparam actorStyle awesome
+
 boundary "Окно редактирования нотариусов" as edit_window
 boundary "Окно добавления нотариусов" as add_notarius_window
 boundary "Главное окно" as main_window
@@ -8,8 +10,8 @@ actor "Администратор" as user
 user -- edit_window
 
 control "Обновить таблицу" as update_control
-control "Добавить элемент" as add_control
-control "Отмена" as cancel_control
+control "Отображение окна\nдобавления нотариусов" as add_control
+control "Отображение главного окна" as cancel_control
 
 entity "База данных" as DB
 
@@ -19,9 +21,11 @@ edit_window --> add_control: Нажата кнопка \nДобавить эле
 
 add_control -- add_notarius_window
 
-update_control --> DB: Сохранение изменений
+update_control --> DB
 
 cancel_control --> main_window
 
+add_notarius_window -up- user
+main_window -up- user
 
 @enduml

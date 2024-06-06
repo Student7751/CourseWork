@@ -1,21 +1,29 @@
 @startuml
+skinparam actorStyle awesome
+
 boundary "Окно авторизации" as entry_window
 boundary "Окно ошибки" as error_window #red
 boundary "Главное окно" as main_window
 
-actor "Клиент" as user
+actor "Пользователь" as user
 
 Entity "База данных" as DB
 
-control "Подтверждение данных" as validation_control
+control "Валидация данных" as validation_control
+control "Отобразить главное окно" as main_control
 
-validation_control --> DB
+control "Отобразить окно ошибки" as show_error #red
 
-user -- entry_window
+validation_control -left-> DB
 
-entry_window --> validation_control : Вводит данные и нажимает кнопку Вход
-validation_control --> main_window: Успех
-validation_control --> error_window: Ошибка
+user -down- entry_window
 
+entry_window -down-> validation_control : Вводит данные и\nнажимает кнопку Вход
+validation_control --> main_control: Успех
+main_control --> main_window
+validation_control --> show_error : Неверные данные
+show_error --> error_window
+error_window -up- user
+main_window -up- user
 
 @enduml

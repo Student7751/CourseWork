@@ -11,21 +11,23 @@ control error as "Ошибка" #red
 
 admin -> main_window : Нажимает кнопку\n'Просмотреть список клиентов'
 
-main_window -> client_list_window : Отобразить
+main_window -> client_list_window : Создание окна
+client_list_window --> admin
 client_list_window -> clients_db : Загрузка данных
+clients_db --> client_list_window 
 
-alt БД пуста
-    client_list_window -> error : Отобразить
-    error --> main_window : Возврат
-else БД не пуста
-    client_list_window -> client_list_window : Отобразить клиентов
-    client_list_window --> admin : Возврат
+alt Клиенты не выделены
+    client_list_window -> error : Генерация ошибки
+    error --> main_window
+else Клиенты выделены
+    client_list_window -> clients_db : Удаление клиентов\nи сохранение изменений
+    clients_db --> client_list_window
 end
 
 opt Нажата кнопка 'Назад'
     admin -> client_list_window : Нажата кнопка 'Назад'
     client_list_window -> main_window : Отобразить
-    main_window --> admin : Возврат
+    main_window --> admin
 end
 
 @enduml

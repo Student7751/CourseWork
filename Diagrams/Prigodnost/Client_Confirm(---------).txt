@@ -1,0 +1,27 @@
+@startuml
+boundary "Окно подтверждения сделки" as confirm_deal_window
+boundary "Окно заключения сделки" as work_window
+
+actor "Клиент" as user
+
+
+control "Отобразить окно\nзаключения сделки" as back_control
+control "Сохранить документ" as save_control
+control "Сохранение изменений" as confirm_control
+control "Отобразить окно\nподтверждения сделки" as view_control
+
+
+user -down- confirm_deal_window
+user -down- work_window
+
+work_window -right-> view_control: Выбраны услуги\nНажата кнопка заключения сделки
+entity "База данных" as DB
+
+view_control -down-> confirm_deal_window
+confirm_deal_window --> back_control: Нажата кнопка Отмена
+back_control --> work_window
+confirm_deal_window --> save_control: Нажата кнопка\nсохранения документа
+confirm_deal_window --> confirm_control: Нажата кнопка Подтвердить
+confirm_control --> DB
+
+@enduml

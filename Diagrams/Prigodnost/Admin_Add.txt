@@ -1,24 +1,35 @@
 @startuml
+skinparam actorStyle awesome
 boundary "Окно добавления нотариусов" as add_notarius_window
-boundary "Главное окно" as main_window
+boundary "Окно редактирования нотариусов" as edit_notarius_window
+boundary "Окно предупреждения" as warning_window #yellow
 
 actor "Администратор" as user
 
-user -- add_notarius_window
+user -- edit_notarius_window
+
+control "Отображение окна \nдобавления нотариуса" as add_control
+control "Отображение окна \nредактирования нотариусов" as edit_control
+control "Сохранение изменений" as DB_control
+control "Загрузка данных" as load_control
+control "Отображение окна предупреждения" as warning_control #yellow
 
 
-control "Отмена" as cancel_control
-control "Добавить" as add_control
-control "Отобразить ошибку" as error_control #red
+edit_notarius_window--> add_control: Нажата кнопка\nдобавить элемент
+add_control --> add_notarius_window
+edit_notarius_window --> load_control
 
 entity "База данных" as DB
 
-add_notarius_window --> cancel_control: Нажата кнопка Отмена
-add_notarius_window --> add_control: Заполнить форму\nНажата кнопка Добавить
+load_control --> DB
+add_notarius_window --> edit_control: Нажата кнопка Назад
+edit_control --> edit_notarius_window
 
-cancel_control --> main_window
-add_control --> DB: Сохранение изменений
-add_control --> error_control: Конфликт данных
+add_notarius_window --> DB_control: Корректно заполнены поля\nНажата кнопка Добавить
+DB_control--> DB
 
+add_notarius_window --> warning_control : Некорректно заполнены поля\nНажата кнопка Добавить
+warning_control --> warning_window
 
+warning_window -up- user
 @enduml

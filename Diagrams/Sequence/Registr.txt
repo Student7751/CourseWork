@@ -5,28 +5,21 @@ actor user as "Пользователь"
 boundary registration as "Окно регистрации"
 boundary autorisation as "Окно авторизации"
 
-control display_error as "Ошибка" #red
+control display_error as "Окно Ошибки" #red
 
-entity users_BD as "БД пользователей"
+entity users_BD as "База данных"
 
 user -> registration : Вводит данные
 user -> registration : Нажимает кнопку ''Регистрация''
 
 alt Неккоректные данные
     registration -> display_error : Отобразить
-    display_error --> user : Возрат
+    display_error --> user
     
 else Коректные данные
     registration -> users_BD : Данные занесены в БД
-    users_BD --> registration : Возврат ОК
-
     registration -> autorisation : Отобразить окно авторизации
-    autorisation --> user : Возрат
-end
-
-alt Пользователь уже есть в БД пользователей
-    registration -> display_error : Отобразить
-    display_error --> user : Возврат
+    autorisation --> user
 end
 
 opt 
